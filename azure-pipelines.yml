@@ -1,0 +1,59 @@
+trigger:
+  branches:
+    include:
+      - develop
+resources:
+  repositories:
+  - repository: azure-pipelines-templates
+    type: github
+    endpoint: FaganSC-GitHub
+    name: FaganSC/azure-pipelines-templates
+    ref: master
+variables:
+  node_version: '10.x'
+  package_manager: 'npm'
+name: $(Date:yyyy)$(Date:.MM)$(Date:.dd)$(Rev:.r)
+stages:
+- stage: Build
+  dependsOn: []
+  jobs:
+    - template: spfx/build.yml@azure-pipelines-templates
+      parameters:
+        working_directory: 
+        package_manager: ${{ variables.package_manager }}
+        node_version: ${{ variables.node_version }}
+- stage: Test
+  dependsOn: 
+    - Build
+  jobs:
+    - template: spfx/test.yml@azure-pipelines-templates
+      parameters:
+        working_directory: 
+        package_manager: ${{ variables.package_manager }}
+        node_version: ${{ variables.node_version }}
+- stage: GitHubPreRelease
+  displayName: GitHub PreRelease
+  dependsOn:
+    - Build
+    - Test
+  jobs:
+    - template: spfx/release.yml@azure-pipelines-templates
+      parameters:
+        release_title: 'Pre-Release $(Build.BuildNumber)'
+        target_environment: release
+        variables_group: GitHub_Projects
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'))
+        isPreRelease: True
+- stage: GitHubRelease
+  displayName: GitHub Release
+  dependsOn:
+    - Build
+    - Test
+  jobs:
+    - template: spfx/release.yml@azure-pipelines-templates
+      parameters:
+        release_title: 'Release $(Build.BuildNumber)'
+        target_environment: production
+        variables_group: GitHub_Projects
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        isPreRelease: False

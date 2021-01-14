@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "image-slider-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/imageSlider/ImageSliderWebPart.js",
+          "manifest": "./src/webparts/imageSlider/ImageSliderWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ImageSliderWebPartStrings": "lib/webparts/imageSlider/loc/{locale}.js"
+  }
+}
