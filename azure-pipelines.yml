@@ -8,7 +8,7 @@ resources:
     type: github
     endpoint: FaganSC-GitHub
     name: FaganSC/azure-pipelines-templates
-    ref: master
+    ref: develop
 variables:
   node_version: '10.x'
   package_manager: 'npm'
