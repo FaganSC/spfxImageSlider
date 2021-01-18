@@ -18,9 +18,9 @@ export class StaticImage extends React.Component<ISlideProps, ISlideState> {
 
     public render(): React.ReactElement<ISlideProps> {
         const inlineStyle = { backgroundImage: `url(${this.props.slide.LinkFilename})`};
-        if (this.props.slide.HeroLink !== null){
+        if (this.props.slide.ImgSliderLink !== null){
             return (
-                <a href={this.props.slide.HeroLink} >
+                <a href={this.props.slide.ImgSliderLink} >
                     <div className={styles.staticImage } style={inlineStyle}>&nbsp;</div>
                 </a>
             );

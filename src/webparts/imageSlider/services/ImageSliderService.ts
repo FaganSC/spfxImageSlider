@@ -11,7 +11,7 @@ import { sampleData } from './ImageSliderServiceData';
 export class ImageSliderService {
     public static GetItems(context:any): Promise<SliderImageItems[]> {
         const storage = new PnPClientStorage();
-        const test: boolean = true;
+        const test: boolean = false;
         let cacheKey: string = `SliderImageItems`;
         if (Environment.type === EnvironmentType.Local || test) {
             return new Promise<SliderImageItems[]>((resolve, reject) => {
@@ -20,26 +20,26 @@ export class ImageSliderService {
         } else {
             let links: SliderImageItems[] = storage.local.get(cacheKey);
             return new Promise<SliderImageItems[]>((resolve, reject) => {
-                if (links) {
-                    resolve(links);
-                } else {
+                //if (links) {
+                //    resolve(links);
+                //} else {
                     let itemsPromise = this.getSPItems();
                     Promise.all([itemsPromise]).then((results: any[]) => {
                         links = this.convertItems(context,results[0]);
                         storage.local.put(cacheKey, links);
                         resolve(links);
                     });
-                }
+                //}
             });
         }
     }
 
     private static getSPItems() {
         return new Promise<any[]>((resolve, reject) => {
-            sp.web.lists.getByTitle("Hero Images").items
-                .select('Id,Title,LinkFilename,HeroPublishStart,HeroPublishEnd,HeroEnabled,HeroLink,HeroNewTab,HeroEnabled')      
-                .filter("HeroEnabled eq 1")
-                .orderBy("HeroPublishStart")
+            sp.web.lists.getByTitle("Slider Images").items
+                .select('Id,Title,LinkFilename,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled')      
+                .filter("ImgSliderEnabled eq 1")
+                .orderBy("ImgSliderPublishStart")
                 .get()
                 .then((items: any[]) => {
                     console.log(items);
@@ -56,12 +56,12 @@ export class ImageSliderService {
         var initalData: SliderImageItems[] = items.map((item: any) => {
             var newItem = {
                 Title: item.Title,
-                LinkFilename: url + "/HeroImages/" + item.LinkFilename,
-                HeroPublishStart: item.HeroPublishStart,
-                HeroPublishEnd: item.HeroPublishEnd,
-                HeroLink: item.HeroLink.Url,
-                HeroNewTab: item.HeroNewTab,
-                HeroEnabled: item.HeroEnabled,
+                LinkFilename: url + "/SliderImgs/" + item.LinkFilename,
+                ImgSliderPublishStart: item.ImgSliderPublishStart,
+                ImgSliderPublishEnd: item.ImgSliderPublishEnd,
+                ImgSliderLink: item.ImgSliderLink !== null ? item.ImgSliderLink.Url : null,
+                ImgSliderNewTab: item.ImgSliderNewTab,
+                ImgSliderEnabled: item.ImgSliderEnabled,
             };
             return newItem;
         });
