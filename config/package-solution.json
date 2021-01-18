@@ -1,21 +1,30 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
-  "solution": {
-    "name": "image-slider-client-side-solution",
-    "id": "ed354528-742c-4ffa-9069-5b456736314d",
-    "version": "1.0.0.0",
-    "includeClientSideAssets": true,
-    "skipFeatureDeployment": true,
-    "isDomainIsolated": false,
-    "developer": {
-      "name": "",
-      "websiteUrl": "",
-      "privacyUrl": "",
-      "termsOfUseUrl": "",
-      "mpnId": ""
+    "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+    "solution": {
+        "name": "SPFx-Image-Slider-Solution",
+        "id": "ed354528-742c-4ffa-9069-5b456736314d",
+        "version": "1.0.0.0",
+        "assets": {
+            "elementManifests": [
+                "elements.xml"
+            ],
+            "elementFiles": [
+                "schema.xml",
+                "Virginia_Beach_Oceanfront.jpg"
+            ]
+        },
+        "includeClientSideAssets": true,
+        "skipFeatureDeployment": true,
+        "isDomainIsolated": false,
+        "developer": {
+            "name": "",
+            "websiteUrl": "",
+            "privacyUrl": "",
+            "termsOfUseUrl": "",
+            "mpnId": ""
+        }
+    },
+    "paths": {
+        "zippedPackage": "solution/image-slider.sppkg"
     }
-  },
-  "paths": {
-    "zippedPackage": "solution/image-slider.sppkg"
-  }
 }
