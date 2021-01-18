@@ -29,12 +29,12 @@ export default class ImageSlider extends React.Component<
 
   private goToSlide = (index) => {
     this.setState({ activeIndex: index, count: 10, running: false });
-  };
+  }
 
   private onclickNextSlide = (e) => {
     e.preventDefault();
     this.goToNextSlide();
-  };
+  }
 
   private goToPrevSlide = (e) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ export default class ImageSlider extends React.Component<
       count: this.state.speed,
       running: false,
     });
-  };
+  }
 
   private goToNextSlide = () => {
     let index = this.state.activeIndex;
@@ -65,7 +65,7 @@ export default class ImageSlider extends React.Component<
       count: this.state.speed,
       running: false,
     });
-  };
+  }
 
   public componentDidMount = () => {
     ImageSliderService.GetItems(this.props.context)
@@ -85,7 +85,7 @@ export default class ImageSlider extends React.Component<
       .catch((error: any) => {
         console.error(error);
       });
-  };
+  }
 
   public render(): React.ReactElement<IImageSliderProps> {
     if (this.state.slides === null) {
