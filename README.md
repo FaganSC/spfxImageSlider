@@ -15,10 +15,10 @@ Short summary on functionality and used technologies.
 - [SharePoint Framework](https://aka.ms/spfx)
 - [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
 
-
-## Prerequisites
-
-> Any special pre-requisites?
+### 3rd Party Packages
+* [PnPjs](https://pnp.github.io/pnpjs/)
+* [PnP Controls React](https://pnp.github.io/sp-dev-fx-controls-react/)
+* [PnP Property Controls](https://pnp.github.io/sp-dev-fx-property-controls/)
 
 ## Solution
 
