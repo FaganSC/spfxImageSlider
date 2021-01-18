@@ -4,16 +4,22 @@
         "name": "SPFx-Image-Slider-Solution",
         "id": "ed354528-742c-4ffa-9069-5b456736314d",
         "version": "1.0.0.0",
-        "assets": {
-            "elementManifests": [
-                "elements.xml"
-            ],
-            "elementFiles": [
-                "schema.xml",
-                "Virginia_Beach_Oceanfront.jpg"
-            ]
-        },
         "includeClientSideAssets": true,
+        "features": [{
+            "title": "Slider Image Web Part",
+            "description": "Deployment of Slider Image Web Part and Library",
+            "id": "61bfff46-b2a0-440a-8f80-efc2a03c21d1",
+            "version": "1.0.0.0",
+            "assets": {
+                "elementManifests": [
+                    "elements.xml"
+                ],
+                "elementFiles": [
+                    "schema.xml",
+                    "Virginia_Beach_Oceanfront.jpg"
+                ]
+            }
+        }],
         "skipFeatureDeployment": true,
         "isDomainIsolated": false,
         "developer": {
@@ -25,6 +31,6 @@
         }
     },
     "paths": {
-        "zippedPackage": "solution/image-slider.sppkg"
+        "zippedPackage": "solution/spfx-image-slider.sppkg"
     }
 }
