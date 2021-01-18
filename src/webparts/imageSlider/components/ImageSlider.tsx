@@ -1,13 +1,16 @@
-import * as React from 'react';
-import styles from './ImageSlider.module.scss';
-import { IImageSliderProps } from './IImageSliderProps';
-import { IImageSliderState } from './IImageSliderState';
+import * as React from "react";
+import styles from "./ImageSlider.module.scss";
+import { IImageSliderProps } from "./IImageSliderProps";
+import { IImageSliderState } from "./IImageSliderState";
 import { Slide } from "./Slide";
 import { StaticImage } from "./StaticImage";
 import { SliderImageItems } from "../models/SliderImageItems";
 import { ImageSliderService } from "../services/ImageSliderService";
 
-export default class ImageSlider extends React.Component<IImageSliderProps, IImageSliderState> {
+export default class ImageSlider extends React.Component<
+  IImageSliderProps,
+  IImageSliderState
+> {
   private timer;
   constructor(props) {
     super(props);
@@ -26,12 +29,12 @@ export default class ImageSlider extends React.Component<IImageSliderProps, IIma
 
   private goToSlide = (index) => {
     this.setState({ activeIndex: index, count: 10, running: false });
-  }
+  };
 
   private onclickNextSlide = (e) => {
     e.preventDefault();
     this.goToNextSlide();
-  }
+  };
 
   private goToPrevSlide = (e) => {
     e.preventDefault();
@@ -46,7 +49,7 @@ export default class ImageSlider extends React.Component<IImageSliderProps, IIma
       count: this.state.speed,
       running: false,
     });
-  }
+  };
 
   private goToNextSlide = () => {
     let index = this.state.activeIndex;
@@ -62,13 +65,13 @@ export default class ImageSlider extends React.Component<IImageSliderProps, IIma
       count: this.state.speed,
       running: false,
     });
-  }
+  };
 
   public componentDidMount = () => {
     ImageSliderService.GetItems(this.props.context)
       .then((spItems: SliderImageItems[]) => {
         this.setState({ slides: spItems });
-        if (spItems.length>1){
+        if (spItems.length > 1) {
           setInterval(() => {
             let newValue = this.state.count - 1;
             if (newValue >= 0) {
@@ -82,7 +85,7 @@ export default class ImageSlider extends React.Component<IImageSliderProps, IIma
       .catch((error: any) => {
         console.error(error);
       });
-  }
+  };
 
   public render(): React.ReactElement<IImageSliderProps> {
     if (this.state.slides === null) {
@@ -91,23 +94,22 @@ export default class ImageSlider extends React.Component<IImageSliderProps, IIma
           <h1>Loading</h1>
         </div>
       );
-    }
-    else if (this.state.slides.length > 1) {
+    } else if (this.state.slides.length > 1) {
       return (
         <div className={styles.imageSlider}>
           <div className={styles.carousel}>
-          <ul className={styles.carouselSlides}>
-          {this.state.slides.map((item: SliderImageItems, index) =>
-            <Slide parent={this} index={index} slide={item} />
-          )}
-          </ul>
-        </div>
+            <ul className={styles.carouselSlides}>
+              {this.state.slides.map((item: SliderImageItems, index) => (
+                <Slide parent={this} index={index} slide={item} />
+              ))}
+            </ul>
+          </div>
         </div>
       );
     } else {
       return (
         <div className={styles.imageSlider}>
-          <StaticImage parent={this} index={0} slide={this.state.slides[0]} />  
+          <StaticImage parent={this} index={0} slide={this.state.slides[0]} />
         </div>
       );
     }
