@@ -1,0 +1,50 @@
+<List xmlns:ows="Microsoft SharePoint" Title="Library Schema" Name="LibrarySchema" Direction="$Resources:Direction;" Url="LibrarySchema" BaseType="1" EnableContentTypes="TRUE" VersioningEnabled="TRUE" MajorVersionLimit="100" EnableMinorVersions="FALSE" MajorWithMinorVersionsLimit="0" DisableAttachments="FALSE" FolderCreation="TRUE" RootWebOnly="FALSE">
+    <MetaData>
+        <Fields></Fields>
+        <ContentTypes>
+            <!-- Document Content Type (0x0101) -->
+            <!--<ContentTypeRef ID="0x0101" />-->
+            <ContentType ID="0x0101A33D9AD9805788419BDAAC2CCB37500F" Name="Image Slider" Group="Image Slider Content Types" Description="Image Slider content types from web part solution" Version="0" Hidden="FALSE" Sealed="FALSE">
+                <FieldRefs>
+                    <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                    <FieldRef ID="{d086554e-1290-435d-9c1e-2263189e88c9}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                    <FieldRef ID="{18946d2a-2b5c-4e06-b6eb-9489482add4d}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                    <FieldRef ID="{f4e5dd71-448f-40e2-b991-35874a0d7fd6}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                    <FieldRef ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                    <FieldRef ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                </FieldRefs>
+                <DocumentTemplate TargetName="/_layouts/15/upload.aspx"/>
+            </ContentType>
+        </ContentTypes>
+        <Views>
+            <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="Forms/AllItems.aspx" ContentTypeID="0x">
+                <XslLink Default="TRUE">main.xsl</XslLink>
+                <JSLink>clienttemplates.js</JSLink>
+                <RowLimit Paged="TRUE">30</RowLimit>
+                <Toolbar Type="Standard" />
+                <Aggregations Value="Off" />
+                <ViewFields>
+                    <!-- Name is the InternalName -->
+                    <FieldRef Name="DocIcon" />
+                    <FieldRef Name="LinkFilename"></FieldRef>
+                    <FieldRef Name="Title"></FieldRef>
+                    <FieldRef Name="ImgSliderPublishStart"></FieldRef>
+                    <FieldRef Name="ImgSliderPublishEnd"></FieldRef>
+                    <FieldRef Name="ImgSliderLink"></FieldRef>
+                    <FieldRef Name="ImgSliderNewTab"></FieldRef>
+                    <FieldRef Name="ImgSliderEnabled"></FieldRef>
+                </ViewFields>
+                <Query>
+                    <OrderBy>
+                        <FieldRef Name="ImgSliderPublishStart" />
+                    </OrderBy>
+                </Query>
+            </View>
+        </Views>
+        <Forms>
+            <Form Type="DisplayForm" Url="Forms/DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+            <Form Type="EditForm" Url="Forms/EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+            <Form Type="NewForm" Url="Forms/Upload.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+        </Forms>
+    </MetaData>
+</List>

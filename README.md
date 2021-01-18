@@ -1,4 +1,8 @@
-# image-slider
+# Image Slider
+![Version](https://img.shields.io/badge/Version-0.0.1-green.svg)
+[![Build Status](https://dev.azure.com/scfagan/pipelineBuilds/_apis/build/status/spfx/ImageSlider?repoName=FaganSC%2FspfxImageSlider&branchName=master)](https://dev.azure.com/scfagan/pipelineBuilds/_build/latest?definitionId=19&repoName=FaganSC%2FspfxImageSlider&branchName=master)
+![SPFX Version](https://img.shields.io/badge/SPFX%20Version-1.11-green.svg)
+[![GitHub issues](https://img.shields.io/github/issues/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/issues/)
 
 ## Summary
 
@@ -6,16 +10,11 @@ Short summary on functionality and used technologies.
 
 [picture of the solution in action, if possible]
 
-## Used SharePoint Framework Version
-
-![version](https://img.shields.io/badge/version-1.11-green.svg)
-
 ## Applies to
 
 - [SharePoint Framework](https://aka.ms/spfx)
 - [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
 
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
 
 ## Prerequisites
 
@@ -25,14 +24,13 @@ Short summary on functionality and used technologies.
 
 Solution|Author(s)
 --------|---------
-folder name | Author details (name, company, twitter alias with link)
+SPFX Image Slider | [Shawn Fagan](https://twitter.com/fagansc)
 
 ## Version history
 
 Version|Date|Comments
 -------|----|--------
-1.1|March 10, 2021|Update comment
-1.0|January 29, 2021|Initial release
+1.0|January 20, 2021|Initial release
 
 ## Disclaimer
 

@@ -1,3 +1,3 @@
 export interface IImageSliderProps {
-  description: string;
+  context: any;
 }

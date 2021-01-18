@@ -6,6 +6,7 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { sp } from '@pnp/sp';
 
 import * as strings from 'ImageSliderWebPartStrings';
 import ImageSlider from './components/ImageSlider';
@@ -16,12 +17,19 @@ export interface IImageSliderWebPartProps {
 }
 
 export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSliderWebPartProps> {
+  public onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      sp.setup({
+        spfxContext: this.context
+      });
+    });
+  }
 
   public render(): void {
     const element: React.ReactElement<IImageSliderProps> = React.createElement(
       ImageSlider,
       {
-        description: this.properties.description
+        context: this.context
       }
     );
 
@@ -44,14 +52,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
             description: strings.PropertyPaneDescription
           },
           groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
+          
           ]
         }
       ]
