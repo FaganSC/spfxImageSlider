@@ -7,9 +7,12 @@ import { PnPClientStorage } from "@pnp/common";
 import { SliderImageItems } from '../models/SliderImageItems';
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { sampleData } from './ImageSliderServiceData';
-
+import * as moment from 'moment';
+import { displayView } from '../models/enums';
+import { IList } from '@pnp/sp/lists';
+import { IItems } from '@pnp/sp/items';
 export class ImageSliderService {
-    public static GetItems(context:any): Promise<SliderImageItems[]> {
+    public static GetItems(context:any, wpDisplayView: displayView): Promise<SliderImageItems[]> {
         const storage = new PnPClientStorage();
         const test: boolean = false;
         let cacheKey: string = `SliderImageItems`;
@@ -23,7 +26,7 @@ export class ImageSliderService {
                 //if (links) {
                 //    resolve(links);
                 //} else {
-                    let itemsPromise = this.getSPItems();
+                    let itemsPromise = this.getSPItems(wpDisplayView);
                     Promise.all([itemsPromise]).then((results: any[]) => {
                         links = this.convertItems(context,results[0]);
                         storage.local.put(cacheKey, links);
@@ -34,20 +37,27 @@ export class ImageSliderService {
         }
     }
 
-    private static getSPItems() {
+    private static getSPItems(wpDisplayView: displayView) {
+        var today = new Date();
+        var filterDate = moment(today).format("YYYY-MM-DD");
         return new Promise<any[]>((resolve, reject) => {
-            sp.web.lists.getByTitle("Slider Images").items
-                .select('Id,Title,LinkFilename,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled')      
-                .filter("ImgSliderEnabled eq 1")
-                .orderBy("ImgSliderPublishStart")
-                .get()
-                .then((items: any[]) => {
-                    console.log(items);
-                    resolve(items);
-                })
-                .catch((error: any) => {
-                    reject(error);
-                });
+            var spItems: IItems = sp.web.lists.getByTitle("Slider Images").items;
+            spItems.select("Id,Title,LinkFilename,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified");
+            if (wpDisplayView === displayView.EnabledOnly){
+                spItems.filter("ImgSliderEnabled eq 1");
+                spItems.orderBy("Modified");
+            } else if (wpDisplayView === displayView.PublicDates){
+                spItems.filter("ImgSliderPublishStart le '" + filterDate + "' and ImgSliderPublishEnd ge '" + filterDate + "'");
+                spItems.orderBy("ImgSliderPublishStart");
+            } else {
+                spItems.orderBy("Modified");
+            }
+            spItems.get()
+            .then((items: any[]) => {    
+                resolve(items);
+            }).catch((error: any) => {
+                reject(error);
+            });
         });
     }
 

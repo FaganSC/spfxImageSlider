@@ -3,17 +3,21 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneDropdown,
+  PropertyPaneSlider
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { sp } from '@pnp/sp';
-
+import { PropertyFieldFilePicker, IPropertyFieldFilePickerProps, IFilePickerResult } from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
+import { displayView } from '../imageSlider/models/enums';
 import * as strings from 'ImageSliderWebPartStrings';
 import ImageSlider from './components/ImageSlider';
 import { IImageSliderProps } from './components/IImageSliderProps';
 
 export interface IImageSliderWebPartProps {
-  description: string;
+  filePickerResult: IFilePickerResult;
+  imagesDisplay: displayView;
+  slideSpeed: number;
 }
 
 export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSliderWebPartProps> {
@@ -29,7 +33,10 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
     const element: React.ReactElement<IImageSliderProps> = React.createElement(
       ImageSlider,
       {
-        context: this.context
+        context: this.context,
+        filePickerResult: this.properties.filePickerResult,
+        displayView: this.properties.imagesDisplay,
+        slideSpeed: this.properties.slideSpeed * 1000
       }
     );
 
@@ -52,7 +59,43 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
             description: strings.PropertyPaneDescription
           },
           groups: [
-          
+            {
+              groupName: "Display Options",
+              groupFields: [
+                PropertyPaneDropdown('imagesDisplay', {
+                  label: 'Images to Display',
+                  options: [
+                    { key: displayView.AllImages, text: 'Display All Images' },
+                    { key: displayView.EnabledOnly, text: 'Display Only Enabled Images' },
+                    { key: displayView.PublicDates, text: 'Display Based on Publish Dates' }
+                  ]
+                }),
+                PropertyPaneSlider('slideSpeed',{  
+                  label:"Slide Speed",  
+                  min: 5,  
+                  max: 30,  
+                  value: this.properties.slideSpeed,  
+                  showValue: true,  
+                  step: 1                
+                })
+              ]
+            },
+            {
+              groupName: strings.BasicGroupName,
+              groupFields: [
+                PropertyFieldFilePicker('filePicker', {
+                  context: this.context,
+                  filePickerResult: this.properties.filePickerResult,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  onSave: (e: IFilePickerResult) => { console.log(e); this.properties.filePickerResult = e;  },
+                  onChanged: (e: IFilePickerResult) => { console.log(e); this.properties.filePickerResult = e; },
+                  key: "filePickerId",
+                  buttonLabel: "File Picker",
+                  label: "File Picker"             
+              })
+              ]
+            }
           ]
         }
       ]

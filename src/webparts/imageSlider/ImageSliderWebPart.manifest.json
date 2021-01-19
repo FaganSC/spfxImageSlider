@@ -14,7 +14,8 @@
         "description": { "default": "SharePoint Libray based Image Slider" },
         "officeFabricIconFontName": "PhotoCollection",
         "properties": {
-            "description": "imageSlider"
+            "imagesDisplay": 0,
+            "slideSpeed": 10
         }
     }]
 }
