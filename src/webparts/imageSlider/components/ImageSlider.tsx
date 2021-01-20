@@ -138,7 +138,7 @@ export default class ImageSlider extends React.Component<
   public componentDidUpdate(prevProps: IImageSliderProps) {
     const currProps = this.props;
     if (prevProps.displayView !== currProps.displayView) {
-      //clearInterval(this.timer);
+      clearInterval(this.timer);
       this.getImages();
     }
     if (prevProps.slideSpeed !== currProps.slideSpeed) {
@@ -146,7 +146,7 @@ export default class ImageSlider extends React.Component<
         activeIndex: 0,
         speed: currProps.slideSpeed,
       });
-      //clearInterval(this.timer);
+      clearInterval(this.timer);
       this.startTimer(currProps.slideSpeed);
     }
   }
