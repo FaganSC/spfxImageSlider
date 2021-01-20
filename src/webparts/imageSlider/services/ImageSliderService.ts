@@ -38,8 +38,7 @@ export class ImageSliderService {
     }
 
     private static getSPItems(wpDisplayView: displayView) {
-        var today = new Date();
-        var filterDate = moment(today).format("YYYY-MM-DD");
+        var filterDate = moment().format("YYYY-MM-DD");
         return new Promise<any[]>((resolve, reject) => {
             var spItems: IItems = sp.web.lists.getByTitle("Slider Images").items;
             spItems.select("Id,Title,LinkFilename,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified");
