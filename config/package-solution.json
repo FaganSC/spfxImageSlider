@@ -4,6 +4,7 @@
         "name": "SPFx Image Slider Solution",
         "id": "ed354528-742c-4ffa-9069-5b456736314d",
         "version": "1.0.0.0",
+        "iconPath": "images/AppIcon.png",
         "includeClientSideAssets": true,
         "features": [{
             "title": "Slider Image Web Part",
