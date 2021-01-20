@@ -29,6 +29,12 @@
            Indexed="FALSE" 
            Format="Hyperlink" 
         />
+    <Field ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}"
+           Name="ImgSliderCaptions"
+           DisplayName="captions"
+           Type="MultiColumn"
+           Required="FALSE"
+           Group="Image Slider Columns"/>
     <Field ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}"
            Name="ImgSliderNewTab"
            DisplayName="New Tab"
@@ -58,6 +64,7 @@
             <FieldRef ID="{f4e5dd71-448f-40e2-b991-35874a0d7fd6}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
             <FieldRef ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
             <FieldRef ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
         </FieldRefs>
         <DocumentTemplate TargetName="/_layouts/15/upload.aspx"/>
     </ContentType> 
