@@ -32,7 +32,7 @@
     <Field ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}"
            Name="ImgSliderCaptions"
            DisplayName="captions"
-           Type="MultiColumn"
+           Type="Note"
            Required="FALSE"
            Group="Image Slider Columns"/>
     <Field ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}"
