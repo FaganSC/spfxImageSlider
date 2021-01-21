@@ -17,10 +17,11 @@ export class StaticImage extends React.Component<ISlideProps, ISlideState> {
     }
 
     public render(): React.ReactElement<ISlideProps> {
-        const inlineStyle = { backgroundImage: `url(${this.props.slide.LinkFilename})`};
-        if (this.props.slide.ImgSliderLink !== null){
+        const { slide } = this.props;
+        const inlineStyle = { backgroundImage: `url(${slide.LinkFilename})`};
+        if (slide.ImgSliderLink !== null){
             return (
-                <a href={this.props.slide.ImgSliderLink} >
+                <a href={slide.ImgSliderLink} target={slide.ImgSliderNewTab ? "_blank" : "_self"}>
                     <div className={styles.staticImage } style={inlineStyle}>&nbsp;</div>
                 </a>
             );

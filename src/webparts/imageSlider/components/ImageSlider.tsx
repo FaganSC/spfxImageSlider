@@ -26,7 +26,7 @@ export default class ImageSlider extends React.Component<
       activeIndex: 0,
       speed: this.props.slideSpeed,
       running: true,
-      caption: this.props.captionDisplay
+      caption: this.props.captionDisplay,
     };
   }
 
@@ -35,7 +35,7 @@ export default class ImageSlider extends React.Component<
    */
   private goToSlide = (index) => {
     this.setState({ activeIndex: index, running: false });
-  }
+  };
 
   /**
    * Handles onclick to go to the next slide.
@@ -43,7 +43,7 @@ export default class ImageSlider extends React.Component<
   private onclickPrevSlide = (e) => {
     e.preventDefault();
     this.goToPrevSlide(e);
-  }
+  };
 
   /**
    * Handles onclick to go to the next slide.
@@ -51,7 +51,7 @@ export default class ImageSlider extends React.Component<
   private onclickNextSlide = (e) => {
     e.preventDefault();
     this.goToNextSlide();
-  }
+  };
 
   /**
    * Handles action to go to the pervious slide.
@@ -69,7 +69,7 @@ export default class ImageSlider extends React.Component<
       activeIndex: index,
       running: false,
     });
-  }
+  };
 
   /**
    * Handles action to go to the next slide.
@@ -88,7 +88,7 @@ export default class ImageSlider extends React.Component<
       activeIndex: index,
       running: false,
     });
-  }
+  };
 
   /**
    * Function get the images from the SharePoint list.
@@ -105,7 +105,7 @@ export default class ImageSlider extends React.Component<
       .catch((error: any) => {
         console.error(error);
       });
-  }
+  };
 
   /**
    * Handles the start of the slider timer.
@@ -122,7 +122,7 @@ export default class ImageSlider extends React.Component<
         this.goToNextSlide();
       }
     }, interval);
-  }
+  };
 
   /**
    * Handles component mount lifecycle method.
@@ -130,7 +130,7 @@ export default class ImageSlider extends React.Component<
   public componentDidMount = () => {
     //Get Sites from SharePoint Library on Web Part Mount
     this.getImages();
-  }
+  };
 
   /**
    * Handles component update lifecycle method.
@@ -170,16 +170,38 @@ export default class ImageSlider extends React.Component<
           <div className={styles.carousel}>
             <ul className={styles.carouselSlides}>
               {slides.map((item: SliderImageItems, index) => (
-                <Slide parent={this} index={index} slide={item} wpProps={this.props} />
+                <div>
+                  {item.ImgSliderLink === null ? (
+                    <Slide
+                      parent={this}
+                      index={index}
+                      slide={item}
+                      wpProps={this.props}
+                    />
+                  ) : (
+                    <a
+                      href={item.ImgSliderLink}
+                      target={item.ImgSliderNewTab ? "_blank" : "_self"}
+                    >
+                      <Slide
+                        parent={this}
+                        index={index}
+                        slide={item}
+                        wpProps={this.props}
+                      />
+                    </a>
+                  )}
+                </div>
               ))}
             </ul>
           </div>
         </div>
       );
     } else {
+      let staticImg: SliderImageItems = slides[0];
       return (
         <div className={styles.imageSlider}>
-          <StaticImage parent={this} index={0} slide={slides[0]} />
+          <StaticImage parent={this} index={0} slide={staticImg} />
         </div>
       );
     }
