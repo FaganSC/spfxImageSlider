@@ -81,7 +81,7 @@
     </ListInstance>
     
     <!-- Upload files to the SPFxDocumentLibrary -->
-    <Module Name="Files" Url="ImgSliderImages">
+    <Module Name="Files" Url="SliderImgs">
         <File Path="Virginia_Beach_Oceanfront.jpg" Url="Virginia_Beach_Oceanfront.jpg" Type="GhostableInLibrary" ReplaceContent="TRUE" >
             <Property Name="Title" Value = "Image Slider Placeholder"/>
             <Property Name="ImgSliderLink" Value = "/"/>
