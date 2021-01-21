@@ -39,7 +39,8 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
         filePickerResult: this.properties.defaultFilePicker,
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
-        captionDisplay: this.properties.captionDisplay
+        captionDisplay: this.properties.captionDisplay,
+        cdnEnabled: true
       }
     );
 

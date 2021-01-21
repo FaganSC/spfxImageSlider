@@ -20,6 +20,13 @@ Short summary on functionality and used technologies.
 * [PnP Controls React](https://pnp.github.io/sp-dev-fx-controls-react/)
 * [PnP Property Controls](https://pnp.github.io/sp-dev-fx-property-controls/)
 
+## Office 365 CDN
+~~~powershell
+Connect-SPOService https://<tenant>-admin.sharepoint.com
+Set-SPOTenantCdnEnabled -CdnType Both -Enable $true
+Add-SPOTenantCdnOrigin -CdnType Public -OriginUrl */SliderImgs
+~~~ 
+
 ## Solution
 
 Solution|Author(s)
@@ -43,9 +50,10 @@ Version|Date|Comments
 - Clone this repository
 - Ensure that you are at the solution folder
 - in the command-line run:
-  - **npm install**
-  - **gulp serve**
-
+~~~
+npm install
+gulp serve
+~~~
 > Include any additional steps as needed.
 
 ## Features

@@ -12,7 +12,7 @@ import { displayView } from '../models/enums';
 import { IList } from '@pnp/sp/lists';
 import { IItems } from '@pnp/sp/items';
 export class ImageSliderService {
-    public static GetItems(context:any, wpDisplayView: displayView): Promise<SliderImageItems[]> {
+    public static GetItems(context:any, wpDisplayView: displayView, cdnEnabled: boolean): Promise<SliderImageItems[]> {
         const storage = new PnPClientStorage();
         const test: boolean = false;
         let cacheKey: string = `SliderImageItems`;
@@ -28,7 +28,7 @@ export class ImageSliderService {
                 //} else {
                     let itemsPromise = this.getSPItems(wpDisplayView);
                     Promise.all([itemsPromise]).then((results: any[]) => {
-                        links = this.convertItems(context,results[0]);
+                        links = this.convertItems(context,results[0], cdnEnabled);
                         storage.local.put(cacheKey, links);
                         resolve(links);
                     });
@@ -41,7 +41,7 @@ export class ImageSliderService {
         var filterDate = moment().format("YYYY-MM-DD");
         return new Promise<any[]>((resolve, reject) => {
             var spItems: IItems = sp.web.lists.getByTitle("Slider Images").items;
-            spItems.select("Id,Title,LinkFilename,ImgSliderCaptions,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified");
+            spItems.select("Id,Title,LinkFilename,ImgSliderCaptions,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified,EncodedAbsUrl");
             if (wpDisplayView === displayView.EnabledOnly){
                 spItems.filter("ImgSliderEnabled eq 1");
                 spItems.orderBy("Modified");
@@ -60,13 +60,17 @@ export class ImageSliderService {
         });
     }
 
-    private static convertItems(context:any, items: any[]): SliderImageItems[] {
+    private static convertItems(context:any, items: any[], cdnEnabled: boolean): SliderImageItems[] {
         let url: string = context.pageContext.web.absoluteUrl;
         var initalData: SliderImageItems[] = items.map((item: any) => {
+            let imgPath: string = item.EncodedAbsUrl;
+            if (cdnEnabled){
+                imgPath = item.EncodedAbsUrl.replace('https://','https://publiccdn.sharepointonline.com/');
+            }
             var newItem = {
                 Title: item.Title,
                 Caption: item.ImgSliderCaptions,
-                LinkFilename: url + "/SliderImgs/" + item.LinkFilename,
+                LinkFilename: imgPath,
                 ImgSliderPublishStart: item.ImgSliderPublishStart,
                 ImgSliderPublishEnd: item.ImgSliderPublishEnd,
                 ImgSliderLink: item.ImgSliderLink !== null ? item.ImgSliderLink.Url : null,
