@@ -24,7 +24,7 @@ export class Indicators extends React.Component<
     const indicatorsElem: JSX.Element[] = [];
     if (display) {
       for (let i = 0; i < slidesCount; i++) {
-        indicatorsElem.push(<li className={slideItem === i ? styles.active : undefined } onClick={()=>this.props.parent.goToSlide(i)}></li>)        
+        indicatorsElem.push(<li className={slideItem === i ? styles.active : undefined } onClick={()=>this.props.parent.goToSlide(i)}></li>);
       }
     }
     return <ol className={[styles.indicators, styles.rectangle, styles.themeWhite, styles.postionBottom].join(' ')}>{indicatorsElem}</ol>;
