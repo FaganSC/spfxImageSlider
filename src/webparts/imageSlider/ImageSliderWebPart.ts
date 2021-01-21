@@ -20,6 +20,7 @@ export interface IImageSliderWebPartProps {
   imagesDisplay: displayView;
   slideSpeed: number;
   captionDisplay: boolean;
+  cdnStatus: boolean;
 }
 
 export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSliderWebPartProps> {
@@ -40,7 +41,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
         captionDisplay: this.properties.captionDisplay,
-        cdnEnabled: true
+        cdnEnabled: this.properties.cdnStatus
       }
     );
 
@@ -99,7 +100,13 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   key: "filePickerId",
                   buttonLabel: "Image Selector",
                   label: "Select Default Image"             
-              })
+              }),
+              PropertyPaneToggle('cdnStatus',{
+                label: "Render Images using Office 365 CDN",
+                checked: this.properties.cdnStatus,
+                onText: "Enabled",
+                offText: "Disabled"
+              }),
               ]
             }
           ]

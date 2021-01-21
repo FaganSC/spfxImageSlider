@@ -17,7 +17,8 @@
         "properties": {
             "imagesDisplay": 0,
             "slideSpeed": 10,
-            "captionDisplay": 1
+            "captionDisplay": 1,
+            "cdnStatus": 0
         }
     }]
 }
