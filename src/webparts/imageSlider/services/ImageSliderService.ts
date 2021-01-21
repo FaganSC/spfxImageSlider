@@ -41,7 +41,7 @@ export class ImageSliderService {
         var filterDate = moment().format("YYYY-MM-DD");
         return new Promise<any[]>((resolve, reject) => {
             var spItems: IItems = sp.web.lists.getByTitle("Slider Images").items;
-            spItems.select("Id,Title,LinkFilename,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified");
+            spItems.select("Id,Title,LinkFilename,ImgSliderCaptions,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified");
             if (wpDisplayView === displayView.EnabledOnly){
                 spItems.filter("ImgSliderEnabled eq 1");
                 spItems.orderBy("Modified");
@@ -65,6 +65,7 @@ export class ImageSliderService {
         var initalData: SliderImageItems[] = items.map((item: any) => {
             var newItem = {
                 Title: item.Title,
+                Caption: item.ImgSliderCaptions,
                 LinkFilename: url + "/SliderImgs/" + item.LinkFilename,
                 ImgSliderPublishStart: item.ImgSliderPublishStart,
                 ImgSliderPublishEnd: item.ImgSliderPublishEnd,

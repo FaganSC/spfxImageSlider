@@ -5,4 +5,5 @@ export interface IImageSliderProps {
   filePickerResult: IFilePickerResult;
   displayView: displayView;
   slideSpeed: number;
+  captionDisplay: boolean;
 }

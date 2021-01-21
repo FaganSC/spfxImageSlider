@@ -5,5 +5,6 @@ export interface IImageSliderState {
     //count: number;
     speed: number;
     running: boolean;
+    caption: boolean;
   }
   

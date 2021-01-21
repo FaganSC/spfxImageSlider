@@ -15,7 +15,8 @@
         "officeFabricIconFontName": "PhotoCollection",
         "properties": {
             "imagesDisplay": 0,
-            "slideSpeed": 10
+            "slideSpeed": 10,
+            "captionDisplay": 1
         }
     }]
 }

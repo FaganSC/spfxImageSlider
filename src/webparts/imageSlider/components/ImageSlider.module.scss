@@ -41,6 +41,27 @@ $slideHeight: 350px;
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
+                .caption {
+                    display: block;
+                    background-color: #00000096;
+                    position: absolute;
+                    bottom: 0;
+                    height: auto;
+                    width: 100%;
+                    max-height: 20%;
+                    overflow: hidden;
+                    color: white;
+                    text-align: left;
+                    .captionContent {
+                        padding: 5px 10px;
+                    }
+                    .captionTitle {
+                        font-weight: bold;
+                        &:after {
+                            content: ": ";
+                        }
+                    }
+                }
                 p {
                     margin: 0px; //temp
                 }

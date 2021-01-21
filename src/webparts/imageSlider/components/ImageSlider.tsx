@@ -26,6 +26,7 @@ export default class ImageSlider extends React.Component<
       activeIndex: 0,
       speed: this.props.slideSpeed,
       running: true,
+      caption: this.props.captionDisplay
     };
   }
 
@@ -169,7 +170,7 @@ export default class ImageSlider extends React.Component<
           <div className={styles.carousel}>
             <ul className={styles.carouselSlides}>
               {slides.map((item: SliderImageItems, index) => (
-                <Slide parent={this} index={index} slide={item} />
+                <Slide parent={this} index={index} slide={item} wpProps={this.props} />
               ))}
             </ul>
           </div>

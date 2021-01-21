@@ -4,7 +4,8 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
   PropertyPaneDropdown,
-  PropertyPaneSlider
+  PropertyPaneSlider,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { sp } from '@pnp/sp';
@@ -18,6 +19,7 @@ export interface IImageSliderWebPartProps {
   filePickerResult: IFilePickerResult;
   imagesDisplay: displayView;
   slideSpeed: number;
+  captionDisplay: boolean;
 }
 
 export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSliderWebPartProps> {
@@ -36,7 +38,8 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
         context: this.context,
         filePickerResult: this.properties.filePickerResult,
         displayView: this.properties.imagesDisplay,
-        slideSpeed: this.properties.slideSpeed * 1000
+        slideSpeed: this.properties.slideSpeed * 1000,
+        captionDisplay: this.properties.captionDisplay
       }
     );
 
@@ -68,7 +71,8 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                     { key: displayView.AllImages, text: 'Display All Images' },
                     { key: displayView.EnabledOnly, text: 'Display Only Enabled Images' },
                     { key: displayView.PublicDates, text: 'Display Based on Publish Dates' }
-                  ]
+                  ],
+                  selectedKey: displayView.AllImages
                 }),
                 PropertyPaneSlider('slideSpeed',{  
                   label:"Slide Speed",  
@@ -77,6 +81,12 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   value: this.properties.slideSpeed,  
                   showValue: true,  
                   step: 1                
+                }),
+                PropertyPaneToggle('captionDisplay',{
+                  label: "Display Image Caption",
+                  checked: this.properties.captionDisplay,
+                  onText: "Show",
+                  offText: "Hidden"
                 })
               ]
             },
