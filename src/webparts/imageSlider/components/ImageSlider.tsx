@@ -35,7 +35,7 @@ export default class ImageSlider extends React.Component<
    */
   private goToSlide = (index) => {
     this.setState({ activeIndex: index, running: false });
-  };
+  }
 
   /**
    * Handles onclick to go to the next slide.
@@ -43,7 +43,7 @@ export default class ImageSlider extends React.Component<
   private onclickPrevSlide = (e) => {
     e.preventDefault();
     this.goToPrevSlide(e);
-  };
+  }
 
   /**
    * Handles onclick to go to the next slide.
@@ -51,7 +51,7 @@ export default class ImageSlider extends React.Component<
   private onclickNextSlide = (e) => {
     e.preventDefault();
     this.goToNextSlide();
-  };
+  }
 
   /**
    * Handles action to go to the pervious slide.
@@ -69,7 +69,7 @@ export default class ImageSlider extends React.Component<
       activeIndex: index,
       running: false,
     });
-  };
+  }
 
   /**
    * Handles action to go to the next slide.
@@ -88,7 +88,7 @@ export default class ImageSlider extends React.Component<
       activeIndex: index,
       running: false,
     });
-  };
+  }
 
   /**
    * Function get the images from the SharePoint list.
@@ -105,7 +105,7 @@ export default class ImageSlider extends React.Component<
       .catch((error: any) => {
         console.error(error);
       });
-  };
+  }
 
   /**
    * Handles the start of the slider timer.
@@ -122,7 +122,7 @@ export default class ImageSlider extends React.Component<
         this.goToNextSlide();
       }
     }, interval);
-  };
+  }
 
   /**
    * Handles component mount lifecycle method.
@@ -130,13 +130,13 @@ export default class ImageSlider extends React.Component<
   public componentDidMount = () => {
     //Get Sites from SharePoint Library on Web Part Mount
     this.getImages();
-  };
+  }
 
   /**
    * Handles component update lifecycle method.
    * @param prevProps
    */
-  public componentDidUpdate(prevProps: IImageSliderProps) {
+  public componentDidUpdate = (prevProps: IImageSliderProps) => {
     const currProps = this.props;
     if (prevProps.displayView !== currProps.displayView) {
       clearInterval(this.timer);
