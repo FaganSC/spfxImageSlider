@@ -201,7 +201,7 @@ export default class ImageSlider extends React.Component<
       let staticImg: SliderImageItems = slides[0];
       return (
         <div className={styles.imageSlider}>
-          <StaticImage parent={this} index={0} slide={staticImg} />
+          <StaticImage parent={this} index={0} slide={staticImg} wpProps={this.props}/>
         </div>
       );
     }
