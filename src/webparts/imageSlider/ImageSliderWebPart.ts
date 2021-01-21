@@ -16,7 +16,7 @@ import ImageSlider from './components/ImageSlider';
 import { IImageSliderProps } from './components/IImageSliderProps';
 
 export interface IImageSliderWebPartProps {
-  filePickerResult: IFilePickerResult;
+  defaultFilePicker: IFilePickerResult;
   imagesDisplay: displayView;
   slideSpeed: number;
   captionDisplay: boolean;
@@ -36,7 +36,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
       ImageSlider,
       {
         context: this.context,
-        filePickerResult: this.properties.filePickerResult,
+        filePickerResult: this.properties.defaultFilePicker,
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
         captionDisplay: this.properties.captionDisplay
@@ -65,15 +65,6 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
             {
               groupName: "Display Options",
               groupFields: [
-                PropertyPaneDropdown('imagesDisplay', {
-                  label: 'Images to Display',
-                  options: [
-                    { key: displayView.AllImages, text: 'Display All Images' },
-                    { key: displayView.EnabledOnly, text: 'Display Only Enabled Images' },
-                    { key: displayView.PublicDates, text: 'Display Based on Publish Dates' }
-                  ],
-                  selectedKey: displayView.AllImages
-                }),
                 PropertyPaneSlider('slideSpeed',{  
                   label:"Slide Speed",  
                   min: 5,  
@@ -82,27 +73,31 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   showValue: true,  
                   step: 1                
                 }),
+                PropertyPaneDropdown('imagesDisplay', {
+                  label: 'Filter images for display',
+                  options: [
+                    { key: displayView.AllImages, text: 'Display All Images' },
+                    { key: displayView.EnabledOnly, text: 'Display Only Enabled Images' },
+                    { key: displayView.PublicDates, text: 'Display Based on Publish Dates' }
+                  ],
+                  selectedKey: displayView.AllImages
+                }),
                 PropertyPaneToggle('captionDisplay',{
-                  label: "Display Image Caption",
+                  label: "Display Slide Caption",
                   checked: this.properties.captionDisplay,
                   onText: "Show",
                   offText: "Hidden"
-                })
-              ]
-            },
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyFieldFilePicker('filePicker', {
+                }),
+                PropertyFieldFilePicker('defaultFilePicker', {
                   context: this.context,
-                  filePickerResult: this.properties.filePickerResult,
+                  filePickerResult: this.properties.defaultFilePicker,
                   onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
                   properties: this.properties,
-                  onSave: (e: IFilePickerResult) => { console.log(e); this.properties.filePickerResult = e;  },
-                  onChanged: (e: IFilePickerResult) => { console.log(e); this.properties.filePickerResult = e; },
+                  onSave: (e: IFilePickerResult) => { console.log(e); this.properties.defaultFilePicker = e;  },
+                  onChanged: (e: IFilePickerResult) => { console.log(e); this.properties.defaultFilePicker = e; },
                   key: "filePickerId",
-                  buttonLabel: "File Picker",
-                  label: "File Picker"             
+                  buttonLabel: "Image Selector",
+                  label: "Select Default Image"             
               })
               ]
             }

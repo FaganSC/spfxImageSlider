@@ -4,6 +4,7 @@ import { IImageSliderProps } from "./IImageSliderProps";
 import { IImageSliderState } from "./IImageSliderState";
 import { Slide } from "./Slide";
 import { StaticImage } from "./StaticImage";
+import { Indicators } from "./Indicators";
 import { SliderImageItems } from "../models/SliderImageItems";
 import { ImageSliderService } from "../services/ImageSliderService";
 import * as moment from "moment";
@@ -157,7 +158,7 @@ export default class ImageSlider extends React.Component<
    * @param prevProps
    */
   public render(): React.ReactElement<IImageSliderProps> {
-    const { slides } = this.state;
+    const { slides, activeIndex } = this.state;
     if (slides === null) {
       return (
         <div className={styles.imageSlider}>
@@ -176,6 +177,7 @@ export default class ImageSlider extends React.Component<
                       parent={this}
                       index={index}
                       slide={item}
+                      slidesCount={slides.length}
                       wpProps={this.props}
                     />
                   ) : (
@@ -187,6 +189,7 @@ export default class ImageSlider extends React.Component<
                         parent={this}
                         index={index}
                         slide={item}
+                        slidesCount={slides.length}
                         wpProps={this.props}
                       />
                     </a>
@@ -194,9 +197,11 @@ export default class ImageSlider extends React.Component<
                 </div>
               ))}
             </ul>
+            
           </div>
         </div>
       );
+      //<Indicators parent={this} index={activeIndex} slidesCount={slides.length} display={true}/>
     } else {
       let staticImg: SliderImageItems = slides[0];
       return (

@@ -2,10 +2,12 @@ import * as React from "react";
 import { SliderImageItems } from "../models/SliderImageItems";
 import styles from "./ImageSlider.module.scss";
 import { IImageSliderProps } from "./IImageSliderProps";
+import { Indicators } from "./Indicators";
 export interface ISlideProps {
   parent: any;
   index: number;
   slide: SliderImageItems;
+  slidesCount: number;
   wpProps: IImageSliderProps;
 }
 
@@ -17,6 +19,7 @@ export class Slide extends React.Component<ISlideProps, ISlideState> {
   }
 
   public render(): React.ReactElement<ISlideProps> {
+    const { index, slidesCount } = this.props;
     const inlineStyle = {
       backgroundImage: `url(${this.props.slide.LinkFilename})`,
     };
@@ -30,6 +33,8 @@ export class Slide extends React.Component<ISlideProps, ISlideState> {
             : styles.carouselSlide
         }
       >
+        <div className={styles.carouselSlideFooter}>
+        <Indicators parent={parent} index={index} slidesCount={slidesCount} display={true}/>
         {this.props.wpProps.captionDisplay ? (
           <div className={styles.caption}>
             <div className={styles.captionContent}>
@@ -40,6 +45,7 @@ export class Slide extends React.Component<ISlideProps, ISlideState> {
             </div>
           </div>
         ) : undefined}
+        </div>
       </li>
     );
   }
