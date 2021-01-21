@@ -31,7 +31,7 @@
         />
     <Field ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}"
            Name="ImgSliderCaptions"
-           DisplayName="captions"
+           DisplayName="Captions"
            Type="Note"
            Required="FALSE"
            Group="Image Slider Columns"/>
