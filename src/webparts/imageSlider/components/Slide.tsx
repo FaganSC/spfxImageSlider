@@ -19,7 +19,7 @@ export class Slide extends React.Component<ISlideProps, ISlideState> {
   }
 
   public render(): React.ReactElement<ISlideProps> {
-    const { index, slidesCount } = this.props;
+    const { index, slidesCount, parent } = this.props;
     const inlineStyle = {
       backgroundImage: `url(${this.props.slide.LinkFilename})`,
     };
