@@ -139,7 +139,8 @@ export default class ImageSlider extends React.Component<
    */
   public componentDidUpdate = (prevProps: IImageSliderProps) => {
     const currProps = this.props;
-    if (prevProps.displayView !== currProps.displayView) {
+    if (prevProps.displayView !== currProps.displayView 
+      || prevProps.cdnEnabled !== currProps.cdnEnabled) {
       clearInterval(this.timer);
       this.getImages();
     }
