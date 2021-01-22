@@ -177,7 +177,7 @@ export default class ImageSlider extends React.Component<
     }
     if (slides === null) {
       return (
-        <div className={styles.imageSlider}>
+        <div className={inlineStyle}>
           <h1>Loading</h1>
         </div>
       );
@@ -222,7 +222,7 @@ export default class ImageSlider extends React.Component<
     } else {
       let staticImg: SliderImageItems = slides[0];
       return (
-        <div className={styles.imageSlider}>
+        <div className={inlineStyle}>
           <StaticImage parent={this} index={0} slide={staticImg} wpProps={this.props}/>
         </div>
       );
