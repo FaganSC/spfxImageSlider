@@ -22,6 +22,10 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        .caption {
+            bottom: 0;
+            position: absolute;
+        }
     }
     a {
         height: 100%;
