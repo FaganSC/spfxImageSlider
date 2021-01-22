@@ -104,6 +104,18 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   onText: "Show",
                   offText: "Hidden"
                 }),
+                PropertyPaneToggle('showIndicators',{
+                  label: "Display Slide Indicators",
+                  checked: this.properties.showIndicators,
+                  onText: "Display",
+                  offText: "Hidden"
+                }),
+                PropertyPaneToggle('cdnStatus',{
+                  label: "Render Images using Office 365 Public CDN",
+                  checked: this.properties.cdnStatus,
+                  onText: "Enabled",
+                  offText: "Disabled"
+                }),
                 PropertyFieldFilePicker('defaultFilePicker', {
                   context: this.context,
                   filePickerResult: this.properties.defaultFilePicker,
@@ -114,18 +126,6 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   key: "filePickerId",
                   buttonLabel: "Image Selector",
                   label: "Select Default Image"             
-              }),
-              PropertyPaneToggle('cdnStatus',{
-                label: "Render Images using Office 365 CDN",
-                checked: this.properties.cdnStatus,
-                onText: "Enabled",
-                offText: "Disabled"
-              }),
-              PropertyPaneToggle('showIndicators',{
-                label: "Display Slide Indicators",
-                checked: this.properties.showIndicators,
-                onText: "Display",
-                offText: "Hidden"
               })
               ]
             }
