@@ -7,7 +7,7 @@ import { StaticImage } from "./StaticImage";
 import { Indicators } from "./Indicators";
 import { SliderImageItems } from "../models/SliderImageItems";
 import { ImageSliderService } from "../services/ImageSliderService";
-import * as moment from "moment";
+import { IconButton } from "office-ui-fabric-react/lib/Button";
 export default class ImageSlider extends React.Component<
   IImageSliderProps,
   IImageSliderState
@@ -198,7 +198,8 @@ export default class ImageSlider extends React.Component<
                 </div>
               ))}
             </ul>
-            
+            <IconButton className={[styles.advancers, styles.next].join(' ')} iconProps={{ iconName: 'ChevronRight' }} onClick={(e) => { this.onclickNextSlide(e); }} />
+            <IconButton className={[styles.advancers, styles.prev].join(' ')}iconProps={{ iconName: 'ChevronLeft' }} onClick={(e) => { this.onclickPrevSlide(e); }} />
           </div>
         </div>
       );

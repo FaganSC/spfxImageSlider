@@ -159,4 +159,16 @@ $slideHeight: 350px;
             border-bottom: 10px solid transparent;
         }
     }
+    .advancers {
+        background-color: "[theme: white, default: #FFF]";
+        position: absolute;
+        top: 40%;
+        opacity: 0.5;
+        &.next {
+            right: 0;
+        }
+        &.prev {
+            left: 0;
+        }
+    }
 }
