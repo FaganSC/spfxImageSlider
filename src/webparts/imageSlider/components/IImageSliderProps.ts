@@ -7,4 +7,5 @@ export interface IImageSliderProps {
   slideSpeed: number;
   captionDisplay: boolean;
   cdnEnabled: boolean;
+  showIndicators: boolean;
 }

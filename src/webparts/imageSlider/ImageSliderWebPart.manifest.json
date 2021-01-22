@@ -18,7 +18,8 @@
             "imagesDisplay": 0,
             "slideSpeed": 10,
             "captionDisplay": 1,
-            "cdnStatus": 0
+            "cdnStatus": 0,
+            "showIndicators": 1
         }
     }]
 }

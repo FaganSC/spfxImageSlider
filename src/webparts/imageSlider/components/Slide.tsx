@@ -34,7 +34,7 @@ export class Slide extends React.Component<ISlideProps, ISlideState> {
         }
       >
         <div className={styles.carouselSlideFooter}>
-        <Indicators parent={parent} index={index} slidesCount={slidesCount} display={true}/>
+        { this.props.wpProps.showIndicators ? <Indicators parent={parent} index={index} slidesCount={slidesCount} display={true}/> : undefined }
         {this.props.wpProps.captionDisplay ? (
           <div className={styles.caption}>
             <div className={styles.captionContent}>

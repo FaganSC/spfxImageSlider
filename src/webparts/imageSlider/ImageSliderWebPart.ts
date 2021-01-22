@@ -21,6 +21,7 @@ export interface IImageSliderWebPartProps {
   slideSpeed: number;
   captionDisplay: boolean;
   cdnStatus: boolean;
+  showIndicators: boolean;
 }
 
 export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSliderWebPartProps> {
@@ -41,7 +42,8 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
         captionDisplay: this.properties.captionDisplay,
-        cdnEnabled: this.properties.cdnStatus
+        cdnEnabled: this.properties.cdnStatus,
+        showIndicators: this.properties.showIndicators
       }
     );
 
@@ -107,6 +109,12 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                 onText: "Enabled",
                 offText: "Disabled"
               }),
+              PropertyPaneToggle('showIndicators',{
+                label: "Display Slide Indicators",
+                checked: this.properties.showIndicators,
+                onText: "Display",
+                offText: "Hidden"
+              })
               ]
             }
           ]
