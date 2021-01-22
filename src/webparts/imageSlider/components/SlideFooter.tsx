@@ -1,0 +1,38 @@
+import * as React from "react";
+import { SliderImageItems } from "../models/SliderImageItems";
+import styles from "./ImageSlider.module.scss";
+import { Indicators } from "./Indicators";
+export interface ISlideFooterProps {
+  activeIndex: number;
+  showIndicators: boolean;
+  slideCount: number;
+  captionDisplay:boolean;
+  activeSlide: SliderImageItems;
+}
+
+export interface ISlideFooterState {}
+
+export class SlideFooter extends React.Component<ISlideFooterProps, ISlideFooterState> {
+  constructor(props) {
+    super(props);
+  }
+
+  public render(): React.ReactElement<ISlideFooterProps> {
+    const { activeIndex, showIndicators,slideCount,captionDisplay,activeSlide } = this.props;
+    return (
+      <div className={styles.sliderFooter}>
+      {showIndicators ? <Indicators parent={this} index={activeIndex} slidesCount={slideCount} display={true}/> : undefined }
+      {captionDisplay && activeSlide.Title !== null && activeSlide.Caption !== null ? (
+        <div className={styles.caption}>
+          <div className={styles.captionContent}>
+            <span className={styles.captionTitle}>
+              {activeSlide.Title}
+            </span>
+            <span>{activeSlide.Caption}</span>
+          </div>
+        </div>
+      ) : undefined}
+      </div>
+    );
+  }
+}

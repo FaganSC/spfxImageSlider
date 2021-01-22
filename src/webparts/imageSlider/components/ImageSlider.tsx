@@ -3,8 +3,8 @@ import styles from "./ImageSlider.module.scss";
 import { IImageSliderProps } from "./IImageSliderProps";
 import { IImageSliderState } from "./IImageSliderState";
 import { Slide } from "./Slide";
+import { SlideFooter } from "./SlideFooter";
 import { StaticImage } from "./StaticImage";
-import { Indicators } from "./Indicators";
 import { SliderImageItems } from "../models/SliderImageItems";
 import { ImageSliderService } from "../services/ImageSliderService";
 import { IconButton } from "office-ui-fabric-react/lib/Button";
@@ -161,6 +161,7 @@ export default class ImageSlider extends React.Component<
    */
   public render(): React.ReactElement<IImageSliderProps> {
     const { slides, activeIndex } = this.state;
+    const { captionDisplay } = this.props;
     let inlineStyle;
     switch(this.props.imageSize){
       case imageSize.Small:
@@ -182,6 +183,7 @@ export default class ImageSlider extends React.Component<
         </div>
       );
     } else if (slides.length > 1) {
+      let activeSlide : SliderImageItems = slides[activeIndex];
       return (
         <div className={inlineStyle}>
           <div className={styles.carousel}>
@@ -189,41 +191,27 @@ export default class ImageSlider extends React.Component<
               {slides.map((item: SliderImageItems, index) => (
                 <div>
                   {item.ImgSliderLink === null ? (
-                    <Slide
-                      parent={this}
-                      index={index}
-                      slide={item}
-                      slidesCount={slides.length}
-                      wpProps={this.props}
-                    />
+                    <Slide index={index} activeIndex = {activeIndex} slide={item} />
                   ) : (
-                    <a
-                      href={item.ImgSliderLink}
-                      target={item.ImgSliderNewTab ? "_blank" : "_self"}
-                    >
-                      <Slide
-                        parent={this}
-                        index={index}
-                        slide={item}
-                        slidesCount={slides.length}
-                        wpProps={this.props}
-                      />
+                    <a href={item.ImgSliderLink} target={item.ImgSliderNewTab ? "_blank" : "_self"} >
+                      <Slide index={index} activeIndex = {activeIndex} slide={item} />
                     </a>
                   )}
                 </div>
               ))}
             </ul>
+            <SlideFooter activeIndex={activeIndex} showIndicators={this.props.showIndicators} slideCount={slides.length} captionDisplay={captionDisplay} activeSlide={activeSlide}/>
             <IconButton className={[styles.advancers, styles.next].join(' ')} iconProps={{ iconName: 'ChevronRight' }} onClick={(e) => { this.onclickNextSlide(e); }} />
             <IconButton className={[styles.advancers, styles.prev].join(' ')}iconProps={{ iconName: 'ChevronLeft' }} onClick={(e) => { this.onclickPrevSlide(e); }} />
           </div>
         </div>
       );
-      //<Indicators parent={this} index={activeIndex} slidesCount={slides.length} display={true}/>
     } else {
       let staticImg: SliderImageItems = slides[0];
       return (
         <div className={inlineStyle}>
           <StaticImage parent={this} index={0} slide={staticImg} wpProps={this.props}/>
+          <SlideFooter activeIndex={0} showIndicators={false} slideCount={1} captionDisplay={captionDisplay} activeSlide={staticImg}/>
         </div>
       );
     }

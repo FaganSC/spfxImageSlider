@@ -25,34 +25,12 @@ export class StaticImage extends React.Component<ISlideProps, ISlideState> {
           href={slide.ImgSliderLink}
           target={slide.ImgSliderNewTab ? "_blank" : "_self"}
         >
-          <div className={styles.staticImage} style={inlineStyle}>
-            {this.props.wpProps.captionDisplay ? (
-              <div className={styles.caption}>
-                <div className={styles.captionContent}>
-                  <span className={styles.captionTitle}>
-                    {this.props.slide.Title}
-                  </span>
-                  <span>{this.props.slide.Caption}</span>
-                </div>
-              </div>
-            ) : undefined}
-          </div>
+          <div className={styles.staticImage} style={inlineStyle}></div>
         </a>
       );
     } else {
       return (
-        <div className={styles.staticImage} style={inlineStyle}>
-          {this.props.wpProps.captionDisplay ? (
-            <div className={styles.caption}>
-              <div className={styles.captionContent}>
-                <span className={styles.captionTitle}>
-                  {this.props.slide.Title}
-                </span>
-                <span>{this.props.slide.Caption}</span>
-              </div>
-            </div>
-          ) : undefined}
-        </div>
+        <div className={styles.staticImage} style={inlineStyle}></div>
       );
     }
   }

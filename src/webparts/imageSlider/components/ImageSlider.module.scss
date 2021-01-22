@@ -13,20 +13,6 @@
     &.sizeXLarge {
         height: 450px;
     }
-    .staticImage {
-        margin-right: auto;
-        margin-left: auto;
-        text-align: center;
-        height: 100%;
-        width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        .caption {
-            bottom: 0;
-            position: absolute;
-        }
-    }
     a {
         height: 100%;
     }
@@ -64,58 +50,45 @@
                     opacity: 1;
                     transition: opacity 2s linear;
                 }
-                .carouselSlideContent {
-                    text-align: left;
-                    position: absolute;
-                    bottom: 0;
-                    padding: 10px 10px 10px 10px;
-                    background: rgba(255, 255, 255, 0.75);
-                    color: #ffffff;
-                    width: calc(100% - 20px);
-                    &.InvertColor {
-                        color: #000000;
-                        .carouselSlideDescription {
-                            a {
-                                color: #000000;
-                            }
-                        }
-                    }
-                    .carouselSlideTitle {
-                        margin: 0px;
-                        font-size: 1pc;
-                    }
-                    .carouselSlideDescription {
-                        margin: 0px;
-                        font-size: 0.8pc;
-                        a {
-                            color: #ffffff;
-                        }
-                    }
-                }
-                .carouselSlideFooter {
-                    position: absolute;
-                    bottom: 0;
-                    width: 100%;
-                    max-height: 100px;
-                    overflow: hidden;
-                }
             }
         }
     }
-    .caption {
-        display: block;
-        background-color: #00000096;
-        height: auto;
+    .staticImage {
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+        height: 100%;
         width: 100%;
-        color: white;
-        text-align: left;
-        .captionContent {
-            padding: 5px 10px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        .caption {
+            bottom: 0;
+            position: absolute;
         }
-        .captionTitle {
-            font-weight: bold;
-            &:after {
-                content: ": ";
+    }
+    .sliderFooter {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        max-height: 100px;
+        overflow: hidden;
+        .caption {
+            display: block;
+            background-color: #00000096;
+            height: auto;
+            width: 100%;
+            color: white;
+            text-align: left;
+            bottom: 0;
+            .captionContent {
+                padding: 5px 10px;
+            }
+            .captionTitle {
+                font-weight: bold;
+                &:after {
+                    content: ": ";
+                }
             }
         }
     }
@@ -123,7 +96,6 @@
         display: flex;
         justify-content: center;
         z-index: 10;
-        position: absolute;
         top: 0;
         width: 100%;
         padding: 0;
