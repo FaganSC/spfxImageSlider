@@ -1,8 +1,18 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
-$slideHeight: 350px;
 .imageSlider {
     position: relative;
-    height: $slideHeight;
+    &.sizeSmall {
+        height: 300px;
+    }
+    &.sizeMedium {
+        height: 350px;
+    }
+    &.sizeLarge {
+        height: 400px;
+    }
+    &.sizeXLarge {
+        height: 450px;
+    }
     .staticImage {
         margin-right: auto;
         margin-left: auto;

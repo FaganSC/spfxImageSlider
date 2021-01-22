@@ -10,12 +10,13 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { sp } from '@pnp/sp';
 import { PropertyFieldFilePicker, IPropertyFieldFilePickerProps, IFilePickerResult } from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
-import { displayView } from '../imageSlider/models/enums';
+import { displayView, imageSize } from '../imageSlider/models/enums';
 import * as strings from 'ImageSliderWebPartStrings';
 import ImageSlider from './components/ImageSlider';
 import { IImageSliderProps } from './components/IImageSliderProps';
 
 export interface IImageSliderWebPartProps {
+  imageSize: number;
   defaultFilePicker: IFilePickerResult;
   imagesDisplay: displayView;
   slideSpeed: number;
@@ -38,6 +39,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
       ImageSlider,
       {
         context: this.context,
+        imageSize: this.properties.imageSize,
         filePickerResult: this.properties.defaultFilePicker,
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
@@ -69,6 +71,16 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
             {
               groupName: "Display Options",
               groupFields: [
+                PropertyPaneDropdown('imageSize', {
+                  label: 'Image Size',
+                  options: [
+                    { key: imageSize.Small, text: 'Small (Height: 300px)' },
+                    { key: imageSize.Medium, text: 'Medium (Height: 350px)' },
+                    { key: imageSize.Large, text: 'Large (Height: 400px)' },
+                    { key: imageSize.XLarge, text: 'X-Large (Height: 450px)' },
+                  ],
+                  selectedKey: this.properties.imageSize
+                }),
                 PropertyPaneSlider('slideSpeed',{  
                   label:"Slide Speed",  
                   min: 5,  

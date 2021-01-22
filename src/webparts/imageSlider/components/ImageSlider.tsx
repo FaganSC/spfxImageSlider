@@ -8,6 +8,7 @@ import { Indicators } from "./Indicators";
 import { SliderImageItems } from "../models/SliderImageItems";
 import { ImageSliderService } from "../services/ImageSliderService";
 import { IconButton } from "office-ui-fabric-react/lib/Button";
+import { imageSize } from "../models/enums";
 export default class ImageSlider extends React.Component<
   IImageSliderProps,
   IImageSliderState
@@ -160,6 +161,20 @@ export default class ImageSlider extends React.Component<
    */
   public render(): React.ReactElement<IImageSliderProps> {
     const { slides, activeIndex } = this.state;
+    let inlineStyle;
+    switch(this.props.imageSize){
+      case imageSize.Small:
+        inlineStyle = [styles.imageSlider, styles.sizeSmall].join(' ');
+        break;
+      case imageSize.Large:
+          inlineStyle = [styles.imageSlider, styles.sizeLarge].join(' ');
+          break;
+      case imageSize.XLarge:
+          inlineStyle = [styles.imageSlider, styles.sizeXLarge].join(' ');
+          break;
+      default:
+        inlineStyle = [styles.imageSlider, styles.sizeMedium].join(' ');
+    }
     if (slides === null) {
       return (
         <div className={styles.imageSlider}>
@@ -168,7 +183,7 @@ export default class ImageSlider extends React.Component<
       );
     } else if (slides.length > 1) {
       return (
-        <div className={styles.imageSlider}>
+        <div className={inlineStyle}>
           <div className={styles.carousel}>
             <ul className={styles.carouselSlides}>
               {slides.map((item: SliderImageItems, index) => (
