@@ -3,6 +3,7 @@ import { SliderImageItems } from "../models/SliderImageItems";
 import styles from "./ImageSlider.module.scss";
 import { Indicators } from "./Indicators";
 export interface ISlideFooterProps {
+  parent: any;
   activeIndex: number;
   showIndicators: boolean;
   slideCount: number;
@@ -18,10 +19,10 @@ export class SlideFooter extends React.Component<ISlideFooterProps, ISlideFooter
   }
 
   public render(): React.ReactElement<ISlideFooterProps> {
-    const { activeIndex, showIndicators,slideCount,captionDisplay,activeSlide } = this.props;
+    const { activeIndex, showIndicators,slideCount,captionDisplay,activeSlide,parent } = this.props;
     return (
       <div className={styles.sliderFooter}>
-      {showIndicators ? <Indicators parent={this} index={activeIndex} slidesCount={slideCount} display={true}/> : undefined }
+      {showIndicators ? <Indicators parent={parent} index={activeIndex} slidesCount={slideCount} display={true}/> : undefined }
       {captionDisplay && activeSlide.Title !== null && activeSlide.Caption !== null ? (
         <div className={styles.caption}>
           <div className={styles.captionContent}>

@@ -200,7 +200,7 @@ export default class ImageSlider extends React.Component<
                 </div>
               ))}
             </ul>
-            <SlideFooter activeIndex={activeIndex} showIndicators={this.props.showIndicators} slideCount={slides.length} captionDisplay={captionDisplay} activeSlide={activeSlide}/>
+            <SlideFooter parent={this} activeIndex={activeIndex} showIndicators={this.props.showIndicators} slideCount={slides.length} captionDisplay={captionDisplay} activeSlide={activeSlide}/>
             <IconButton className={[styles.advancers, styles.next].join(' ')} iconProps={{ iconName: 'ChevronRight' }} onClick={(e) => { this.onclickNextSlide(e); }} />
             <IconButton className={[styles.advancers, styles.prev].join(' ')}iconProps={{ iconName: 'ChevronLeft' }} onClick={(e) => { this.onclickPrevSlide(e); }} />
           </div>
@@ -211,7 +211,7 @@ export default class ImageSlider extends React.Component<
       return (
         <div className={inlineStyle}>
           <StaticImage parent={this} index={0} slide={staticImg} wpProps={this.props}/>
-          <SlideFooter activeIndex={0} showIndicators={false} slideCount={1} captionDisplay={captionDisplay} activeSlide={staticImg}/>
+          <SlideFooter parent={this} activeIndex={0} showIndicators={false} slideCount={1} captionDisplay={captionDisplay} activeSlide={staticImg}/>
         </div>
       );
     }
