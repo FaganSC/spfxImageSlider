@@ -1,74 +1,160 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
-
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 .imageSlider {
-  .container {
-    max-width: 700px;
-    margin: 0px auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .row {
-    @include ms-Grid-row;
-    @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
-    padding: 20px;
-  }
-
-  .column {
-    @include ms-Grid-col;
-    @include ms-lg10;
-    @include ms-xl8;
-    @include ms-xlPush2;
-    @include ms-lgPush1;
-  }
-
-  .title {
-    @include ms-font-xl;
-    @include ms-fontColor-white;
-  }
-
-  .subTitle {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .description {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .button {
-    // Our button
-    text-decoration: none;
-    height: 32px;
-
-    // Primary Button
-    min-width: 80px;
-    background-color: $ms-color-themePrimary;
-    border-color: $ms-color-themePrimary;
-    color: $ms-color-white;
-
-    // Basic Button
-    outline: transparent;
     position: relative;
-    font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-size: $ms-font-size-m;
-    font-weight: $ms-font-weight-regular;
-    border-width: 0;
-    text-align: center;
-    cursor: pointer;
-    display: inline-block;
-    padding: 0 16px;
-
-    .label {
-      font-weight: $ms-font-weight-semibold;
-      font-size: $ms-font-size-m;
-      height: 32px;
-      line-height: 32px;
-      margin: 0 4px;
-      vertical-align: top;
-      display: inline-block;
+    &.sizeSmall {
+        height: 300px;
     }
-  }
+    &.sizeMedium {
+        height: 350px;
+    }
+    &.sizeLarge {
+        height: 400px;
+    }
+    &.sizeXLarge {
+        height: 450px;
+    }
+    a {
+        height: 100%;
+    }
+    .carousel {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        .carouselSlides {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            .carouselSlide {
+                position: absolute;
+                margin-right: auto;
+                margin-left: auto;
+                list-style-type: none;
+                text-align: center;
+                height: 100%;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s 2s, opacity 2s linear;
+                width: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                p {
+                    margin: 0px; //temp
+                }
+                &.carouselSlideActive {
+                    display: block;
+                    visibility: visible;
+                    opacity: 1;
+                    transition: opacity 2s linear;
+                }
+            }
+        }
+    }
+    .staticImage {
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        .caption {
+            bottom: 0;
+            position: absolute;
+        }
+    }
+    .sliderFooter {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        max-height: 100px;
+        overflow: hidden;
+        .caption {
+            display: block;
+            background-color: #00000096;
+            height: auto;
+            width: 100%;
+            color: white;
+            text-align: left;
+            bottom: 0;
+            .captionContent {
+                padding: 5px 10px;
+            }
+            .captionTitle {
+                font-weight: bold;
+                &:after {
+                    content: ": ";
+                }
+            }
+        }
+    }
+    .indicators {
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+        top: 0;
+        width: 100%;
+        padding: 0;
+        margin: 5px 0;
+        &.postionBottom {
+            position: relative;
+        }
+        &.postionTop {
+            position: absolute;
+        }
+        &>li {
+            display: inline-block;
+            margin: 0 2px;
+            flex: 0 1 auto;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.5 ease;
+            box-sizing: content-box;
+            background-clip: padding-box;
+            &.active {
+                opacity: 1;
+            }
+        }
+        &.themeWhite>li {
+            background-color: "[theme: white, default: #FFF]";
+        }
+        &.themeBlack>li {
+            background-color: "[theme: black, default: #000]";
+        }
+        &.circle>li {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        &.rectangle>li {
+            width: 25px;
+            height: 5px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+        &.square>li {
+            width: 10px;
+            height: 10px;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+    }
+    .advancers {
+        background-color: "[theme: white, default: #FFF]";
+        position: absolute;
+        top: 40%;
+        opacity: 0.5;
+        &.next {
+            right: 0;
+        }
+        &.prev {
+            left: 0;
+        }
+    }
 }

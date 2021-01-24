@@ -13,6 +13,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "ImageSliderWebPartStrings": "lib/webparts/imageSlider/loc/{locale}.js"
+    "ImageSliderWebPartStrings": "lib/webparts/imageSlider/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }

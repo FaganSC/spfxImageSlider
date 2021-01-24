@@ -2,26 +2,26 @@ trigger:
   branches:
     include:
       - develop
+      - release/*
+      - master
 resources:
   repositories:
   - repository: azure-pipelines-templates
     type: github
-    endpoint: FaganSC-GitHub
+    endpoint: FaganSC
     name: FaganSC/azure-pipelines-templates
     ref: master
 variables:
   node_version: '10.x'
   package_manager: 'npm'
-name: $(Date:yyyy)$(Date:.MM)$(Date:.dd)$(Rev:.r)
+  majorminor: '0.2.0'
+  patch: $[counter(${{ variables.majorminor }}, 0)]
+  version: $(majorminor).$(patch)
+name: ${{ variables.version }}
 stages:
 - stage: Build
-  dependsOn: []
   jobs:
     - template: spfx/build.yml@azure-pipelines-templates
-      parameters:
-        working_directory: 
-        package_manager: ${{ variables.package_manager }}
-        node_version: ${{ variables.node_version }}
 - stage: Test
   dependsOn: 
     - Build
@@ -34,26 +34,61 @@ stages:
 - stage: GitHubPreRelease
   displayName: GitHub PreRelease
   dependsOn:
-    - Build
     - Test
   jobs:
     - template: spfx/release.yml@azure-pipelines-templates
       parameters:
         release_title: 'Pre-Release $(Build.BuildNumber)'
-        target_environment: release
-        variables_group: GitHub_Projects
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/release'))
+        target_environment: PreRelease
+        gitHubConnection: GitHub
+        condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release'))
         isPreRelease: True
 - stage: GitHubRelease
   displayName: GitHub Release
   dependsOn:
-    - Build
     - Test
   jobs:
     - template: spfx/release.yml@azure-pipelines-templates
       parameters:
         release_title: 'Release $(Build.BuildNumber)'
-        target_environment: production
-        variables_group: GitHub_Projects
+        target_environment: Production
+        gitHubConnection: GitHub
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
         isPreRelease: False
+- stage: DeployDevelopment
+  displayName: Deploy to Development Tenant SharePoint App Catalog
+  dependsOn:
+    - Test
+  jobs:
+    - template: spfx/deploy.yml@azure-pipelines-templates
+      parameters:
+        target_environment: Development
+        variables_group: DevelopmentTenant
+        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+- stage: DeployPreRelease
+  displayName: Deploy to Test Tenant SharePoint App Catalog
+  dependsOn:
+    - GitHubPreRelease
+  jobs:
+    - template: spfx/deploy.yml@azure-pipelines-templates
+      parameters:
+        target_environment: PreRelease
+        isPreRelease: True
+        hasChangeLog: True
+        variables_group: DevelopmentTenant
+        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+        condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release'))
+- stage: DeployProduction
+  displayName: Deploy to Production Tenant SharePoint App Catalog
+  dependsOn:
+    - GitHubRelease
+  jobs:
+    - template: spfx/deploy.yml@azure-pipelines-templates
+      parameters:
+        target_environment: Release
+        isPreRelease: False
+        hasChangeLog: True
+        variables_group: DevelopmentTenant
+        o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
