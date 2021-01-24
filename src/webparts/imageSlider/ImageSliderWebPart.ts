@@ -9,7 +9,8 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { sp } from '@pnp/sp';
-import { PropertyFieldFilePicker, IPropertyFieldFilePickerProps, IFilePickerResult } from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
+import { PropertyFieldFilePicker, IFilePickerResult } from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
+import { PropertyPaneWebPartInformation } from '@pnp/spfx-property-controls/lib/PropertyPaneWebPartInformation';
 import { displayView, imageSize } from '../imageSlider/models/enums';
 import * as strings from 'ImageSliderWebPartStrings';
 import ImageSlider from './components/ImageSlider';
@@ -40,7 +41,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
       {
         context: this.context,
         imageSize: this.properties.imageSize,
-        filePickerResult: this.properties.defaultFilePicker,
+        defaultFilePicker: this.properties.defaultFilePicker,
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
         captionDisplay: this.properties.captionDisplay,
@@ -65,7 +66,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: null
           },
           groups: [
             {
@@ -81,13 +82,13 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   ],
                   selectedKey: this.properties.imageSize
                 }),
-                PropertyPaneSlider('slideSpeed',{  
-                  label:"Slide Speed",  
-                  min: 5,  
-                  max: 30,  
-                  value: this.properties.slideSpeed,  
-                  showValue: true,  
-                  step: 1                
+                PropertyPaneSlider('slideSpeed', {
+                  label: "Slide Speed",
+                  min: 5,
+                  max: 30,
+                  value: this.properties.slideSpeed,
+                  showValue: true,
+                  step: 1
                 }),
                 PropertyPaneDropdown('imagesDisplay', {
                   label: 'Filter images for display',
@@ -98,19 +99,19 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   ],
                   selectedKey: displayView.AllImages
                 }),
-                PropertyPaneToggle('captionDisplay',{
+                PropertyPaneToggle('captionDisplay', {
                   label: "Display Slide Caption",
                   checked: this.properties.captionDisplay,
                   onText: "Show",
                   offText: "Hidden"
                 }),
-                PropertyPaneToggle('showIndicators',{
+                PropertyPaneToggle('showIndicators', {
                   label: "Display Slide Indicators",
                   checked: this.properties.showIndicators,
                   onText: "Display",
                   offText: "Hidden"
                 }),
-                PropertyPaneToggle('cdnStatus',{
+                PropertyPaneToggle('cdnStatus', {
                   label: "Render Images using Office 365 Public CDN",
                   checked: this.properties.cdnStatus,
                   onText: "Enabled",
@@ -121,12 +122,22 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                   filePickerResult: this.properties.defaultFilePicker,
                   onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
                   properties: this.properties,
-                  onSave: (e: IFilePickerResult) => { console.log(e); this.properties.defaultFilePicker = e;  },
+                  onSave: (e: IFilePickerResult) => { console.log(e); this.properties.defaultFilePicker = e; },
                   onChanged: (e: IFilePickerResult) => { console.log(e); this.properties.defaultFilePicker = e; },
                   key: "filePickerId",
                   buttonLabel: "Image Selector",
-                  label: "Select Default Image"             
-              })
+                  label: "Select Default Image"
+                })
+              ]
+            },
+            {
+              groupName: "Web Part Support",
+              groupFields: [
+                PropertyPaneWebPartInformation({
+                  description: `This web part is an open source projectm, hosted on <a href='https://github.com/' target="_blank">GitHub</a>. If you have an issue, please submit an issue on the <a href="https://github.com/FaganSC/spfxImageSlider/issues" target="_blank">GitHub Issues</a>.`,
+                  moreInfoLink: `https://github.com/FaganSC/spfxImageSlider`,
+                  key: 'webPartInfoId'
+                })
               ]
             }
           ]

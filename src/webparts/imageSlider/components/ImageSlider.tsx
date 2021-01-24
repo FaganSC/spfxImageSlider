@@ -99,7 +99,23 @@ export default class ImageSlider extends React.Component<
     const { context, displayView, cdnEnabled } = this.props;
     ImageSliderService.GetItems(context, displayView, cdnEnabled)
       .then((spItems: SliderImageItems[]) => {
-        this.setState({ slides: spItems });
+        
+        if (spItems.length > 0) {
+          this.setState({ slides: spItems });
+        } else if (spItems.length == 0) {
+          var retVal: SliderImageItems[] = [];
+          retVal.push({
+            Title: null,
+            Caption: null,
+            LinkFilename: this.props.defaultFilePicker.fileAbsoluteUrl,
+            ImgSliderPublishStart: null,
+            ImgSliderPublishEnd: null,
+            ImgSliderLink: null,
+            ImgSliderNewTab: null,
+            ImgSliderEnabled: null,
+          });
+          this.setState({ slides: retVal });
+        }
         if (spItems.length > 1) {
           this.startTimer();
         }
@@ -152,6 +168,20 @@ export default class ImageSlider extends React.Component<
       });
       clearInterval(this.timer);
       this.startTimer(currProps.slideSpeed);
+    }
+    if (prevProps.defaultFilePicker !== currProps.defaultFilePicker){
+      var retVal: SliderImageItems[] = [];
+          retVal.push({
+            Title: null,
+            Caption: null,
+            LinkFilename: this.props.defaultFilePicker.fileAbsoluteUrl,
+            ImgSliderPublishStart: null,
+            ImgSliderPublishEnd: null,
+            ImgSliderLink: null,
+            ImgSliderNewTab: null,
+            ImgSliderEnabled: null,
+          });
+          this.setState({ slides: retVal });
     }
   }
 

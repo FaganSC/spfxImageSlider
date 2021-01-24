@@ -3,7 +3,7 @@ import { displayView, imageSize } from "../models/enums";
 export interface IImageSliderProps {
   context: any;
   imageSize: imageSize;
-  filePickerResult: IFilePickerResult;
+  defaultFilePicker: IFilePickerResult;
   displayView: displayView;
   slideSpeed: number;
   captionDisplay: boolean;
