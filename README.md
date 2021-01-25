@@ -69,7 +69,7 @@ Version|Date|Comments
  - Controlling required Document Library fields based on Image Filter
 
 ## License
-Connect-MS365 is licensed under terms of GNU Lesser General Publice License (LGPL) v3.0. For further information see LICENSE file.
+This web part is licensed under terms of Apache License V2.0. For further information see [LICENSE](LICENSE) file.
 
 ## Contribute
 Please feel free to comment, feedback and contribute to this. I'm still working on the GitHub setup for handling External Pull Requests. 
