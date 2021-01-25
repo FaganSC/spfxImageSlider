@@ -44,7 +44,7 @@ SPFX Image Slider | [Shawn Fagan](https://twitter.com/fagansc)
 
 Version|Date|Comments
 -------|----|--------
-1.0.0.0|January 24, 2021|Initial release
+1.0.0.0|January 25, 2021|Initial release
 
 ## Current Features
 ### Image Size
@@ -69,10 +69,11 @@ Version|Date|Comments
  - Controlling required Document Library fields based on Image Filter
 
 ## License
-Connect-MS365 is licensed under terms of GNU Lesser General Publice License (LGPL) v3.0. For further information see LICENSE file.
+This web part is licensed under terms of Apache License V2.0. For further information see [LICENSE](LICENSE) file.
 
 ## Contribute
-Please feel free to comment, feedback and contribute to this. I'm still working on the GitHub setup for handling External Pull Requests. 
+Please feel free to comment, feedback and contribute to this. Remember that this repository is maintained by a single person, so please be courteous and patient.
+
 ## References
 
 - [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
