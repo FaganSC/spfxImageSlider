@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Field ID="{A3C6E34A-CBDD-4E57-85D3-846348497A0B}"
+            Name="ImgSliderDisplayOrder"
+            DisplayName="Display Order"
+            Type="Number"
+            Decimals="0"
+            Min="0"
+            Required="FALSE" />
+</Elements>
