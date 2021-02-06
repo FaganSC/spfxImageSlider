@@ -3,7 +3,7 @@ trigger:
     include:
       - develop
       - release/*
-      - features/*
+      - feature/*
       - master
 resources:
   repositories:
