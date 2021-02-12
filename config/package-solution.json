@@ -25,7 +25,7 @@
                 ]
             }
         }],
-        "skipFeatureDeployment": true,
+        "skipFeatureDeployment": false,
         "isDomainIsolated": false,
         "developer": {
             "name": "",
