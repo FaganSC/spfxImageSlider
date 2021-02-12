@@ -66,7 +66,7 @@ stages:
         target_environment: Development
         variables_group: DevelopmentTenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
-        condition: and(succeeded())
+        condition: succeeded()
 - stage: DeployPreRelease
   displayName: Deploy to Test Tenant SharePoint App Catalog
   dependsOn:
