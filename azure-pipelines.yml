@@ -77,7 +77,7 @@ stages:
         target_environment: PreRelease
         isPreRelease: True
         hasChangeLog: True
-        variables_group: DevelopmentTenant
+        variables_group: TestTenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
         condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release'))
 - stage: DeployProduction
@@ -90,6 +90,6 @@ stages:
         target_environment: Release
         isPreRelease: False
         hasChangeLog: True
-        variables_group: DevelopmentTenant
+        variables_group: ProductionTenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
