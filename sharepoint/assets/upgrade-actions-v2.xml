@@ -1,3 +1,7 @@
 <ApplyElementManifests>
-  <ElementManifest Location="00bfea71-e717-4e80-aa17-d0c71b360101\elements-v2.xml" />
+  <ElementManifest Location="61bfff46-b2a0-440a-8f80-efc2a03c21d1\elements-v2.xml" />
 </ApplyElementManifests>
+<AddContentTypeField
+  ContentTypeId="0x0101A33D9AD9805788419BDAAC2CCB37500F"
+  FieldId="{A3C6E34A-CBDD-4E57-85D3-846348497A0B}"
+  PushDown="TRUE" />
