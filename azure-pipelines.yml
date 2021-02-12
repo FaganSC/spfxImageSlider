@@ -15,7 +15,7 @@ resources:
 variables:
   node_version: '10.x'
   package_manager: 'npm'
-  majorminor: '1.0.0'
+  majorminor: '1.0.1'
   patch: $[counter(${{ variables.majorminor }}, 0)]
   version: $(majorminor).$(patch)
 name: ${{ variables.version }}
