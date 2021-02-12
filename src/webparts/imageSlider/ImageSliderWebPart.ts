@@ -11,7 +11,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { sp } from '@pnp/sp';
 import { PropertyFieldFilePicker, IFilePickerResult } from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
 import { PropertyPaneWebPartInformation } from '@pnp/spfx-property-controls/lib/PropertyPaneWebPartInformation';
-import { displayView, imageSize } from '../imageSlider/models/enums';
+import { displayView, imageSize, orderBy, orderByDirection } from '../imageSlider/models/enums';
 import * as strings from 'ImageSliderWebPartStrings';
 import ImageSlider from './components/ImageSlider';
 import { IImageSliderProps } from './components/IImageSliderProps';
@@ -20,6 +20,8 @@ export interface IImageSliderWebPartProps {
   imageSize: number;
   defaultFilePicker: IFilePickerResult;
   imagesDisplay: displayView;
+  orderBy: orderBy;
+  orderByDirection: orderByDirection;
   slideSpeed: number;
   captionDisplay: boolean;
   cdnStatus: boolean;
@@ -41,6 +43,8 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
       {
         context: this.context,
         imageSize: this.properties.imageSize,
+        orderBy: this.properties.orderBy,
+        orderByDirection: this.properties.orderByDirection,
         defaultFilePicker: this.properties.defaultFilePicker,
         displayView: this.properties.imagesDisplay,
         slideSpeed: this.properties.slideSpeed * 1000,
@@ -62,6 +66,29 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    let displayOrderByOption: any = [];
+    let displayOrderByDirectionOption: any = [];
+    if (this.properties.imagesDisplay !== displayView.PublicDates){
+      displayOrderByOption = PropertyPaneDropdown('orderBy', {
+        label: 'Order Images By',
+        options: [
+          { key: orderBy.Modified, text: 'Modified Date' },
+          { key: orderBy.Created, text: 'Created Date' },
+          { key: orderBy.DisplayOrder, text: 'Display Order Field' }
+        ],
+        selectedKey: this.properties.orderBy === null ? orderBy.Modified : this.properties.orderBy
+      });
+
+      displayOrderByDirectionOption = PropertyPaneDropdown('orderByDirection', {
+        label: 'Order By Direction',
+        options: [
+          { key: orderByDirection.Ascending, text: 'Ascending' },
+          { key: orderByDirection.Descending, text: 'Descending' },
+        ],
+        selectedKey: this.properties.orderByDirection === null ?  orderByDirection.Ascending : this.properties.orderByDirection
+      });
+    }
+
     return {
       pages: [
         {
@@ -80,7 +107,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                     { key: imageSize.Large, text: 'Large (Height: 400px)' },
                     { key: imageSize.XLarge, text: 'X-Large (Height: 450px)' },
                   ],
-                  selectedKey: this.properties.imageSize
+                  selectedKey: this.properties.imageSize === null ?  imageSize.Medium : this.properties.imageSize
                 }),
                 PropertyPaneSlider('slideSpeed', {
                   label: "Slide Speed",
@@ -97,8 +124,10 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
                     { key: displayView.EnabledOnly, text: 'Display Only Enabled Images' },
                     { key: displayView.PublicDates, text: 'Display Based on Publish Dates' }
                   ],
-                  selectedKey: displayView.AllImages
+                  selectedKey: this.properties.imagesDisplay === null ?  displayView.AllImages : this.properties.imagesDisplay
                 }),
+                displayOrderByOption,
+                displayOrderByDirectionOption,
                 PropertyPaneToggle('captionDisplay', {
                   label: "Display Slide Caption",
                   checked: this.properties.captionDisplay,
@@ -134,7 +163,7 @@ export default class ImageSliderWebPart extends BaseClientSideWebPart<IImageSlid
               groupName: "Web Part Support",
               groupFields: [
                 PropertyPaneWebPartInformation({
-                  description: `This web part is an open source projectm, hosted on <a href='https://github.com/' target="_blank">GitHub</a>. If you have an issue, please submit an issue on the <a href="https://github.com/FaganSC/spfxImageSlider/issues" target="_blank">GitHub Issues</a>.`,
+                  description: `This web part is an open source project, hosted on <a href='https://github.com/' target="_blank">GitHub</a>. If you have an issue, please submit an issue on the <a href="https://github.com/FaganSC/spfxImageSlider/issues" target="_blank">GitHub Issues</a>.`,
                   moreInfoLink: `https://github.com/FaganSC/spfxImageSlider`,
                   key: 'webPartInfoId'
                 })
