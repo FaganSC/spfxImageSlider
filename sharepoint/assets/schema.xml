@@ -13,6 +13,7 @@
                     <FieldRef ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
                     <FieldRef ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
                     <FieldRef ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                    <FieldRef ID="{A3C6E34A-CBDD-4E57-85D3-846348497A0B}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
                 </FieldRefs>
                 <DocumentTemplate TargetName="/_layouts/15/upload.aspx"/>
             </ContentType>
