@@ -12,6 +12,10 @@ The supporting Document Library is deployed when the solution is added to the si
 
 ![Screenshot](documentation/screenshot.gif)
 
+
+## Updating from 1.0.0.0 to 1.1.0.0
+On upgrade to 1.1.0.0, and you want to use the new Display Order Column, please add the column to the Default View. 
+![Screenshot](documentation/updateview.gif)
 ## Applies to
 
 - [SharePoint Framework](https://aka.ms/spfx)

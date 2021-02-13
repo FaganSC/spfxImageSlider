@@ -96,8 +96,8 @@ export default class ImageSlider extends React.Component<
    * Function get the images from the SharePoint list.
    */
   private getImages = () => {
-    const { context, displayView, cdnEnabled } = this.props;
-    ImageSliderService.GetItems(context, displayView, cdnEnabled)
+    const { context, displayView, cdnEnabled, orderBy, orderByDirection } = this.props;
+    ImageSliderService.GetItems(context, displayView, orderBy, orderByDirection, cdnEnabled)
       .then((spItems: SliderImageItems[]) => {
         
         if (spItems.length > 0) {
@@ -157,7 +157,9 @@ export default class ImageSlider extends React.Component<
   public componentDidUpdate = (prevProps: IImageSliderProps) => {
     const currProps = this.props;
     if (prevProps.displayView !== currProps.displayView 
-      || prevProps.cdnEnabled !== currProps.cdnEnabled) {
+      || prevProps.cdnEnabled !== currProps.cdnEnabled
+      || prevProps.orderBy !== currProps.orderBy
+      || prevProps.orderByDirection !== currProps.orderByDirection) {
       clearInterval(this.timer);
       this.getImages();
     }

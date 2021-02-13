@@ -3,6 +3,7 @@ trigger:
     include:
       - develop
       - release/*
+      - feature/*
       - master
 resources:
   repositories:
@@ -14,7 +15,7 @@ resources:
 variables:
   node_version: '10.x'
   package_manager: 'npm'
-  majorminor: '1.0.0'
+  majorminor: '1.0.1'
   patch: $[counter(${{ variables.majorminor }}, 0)]
   version: $(majorminor).$(patch)
 name: ${{ variables.version }}
@@ -65,7 +66,7 @@ stages:
         target_environment: Development
         variables_group: DevelopmentTenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
-        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+        condition: succeeded()
 - stage: DeployPreRelease
   displayName: Deploy to Test Tenant SharePoint App Catalog
   dependsOn:
@@ -76,7 +77,7 @@ stages:
         target_environment: PreRelease
         isPreRelease: True
         hasChangeLog: True
-        variables_group: DevelopmentTenant
+        variables_group: TestTenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
         condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release'))
 - stage: DeployProduction
@@ -89,6 +90,6 @@ stages:
         target_environment: Release
         isPreRelease: False
         hasChangeLog: True
-        variables_group: DevelopmentTenant
+        variables_group: ProductionTenant
         o365cli_deploy_extra_arguments: '--skipFeatureDeployment'
         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
