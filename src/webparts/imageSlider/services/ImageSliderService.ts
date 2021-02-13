@@ -8,11 +8,11 @@ import { SliderImageItems } from '../models/SliderImageItems';
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { sampleData } from './ImageSliderServiceData';
 import * as moment from 'moment';
-import { displayView } from '../models/enums';
+import { displayView, orderBy, orderByDirection} from '../models/enums';
 import { IList } from '@pnp/sp/lists';
 import { IItems } from '@pnp/sp/items';
 export class ImageSliderService {
-    public static GetItems(context:any, wpDisplayView: displayView, cdnEnabled: boolean): Promise<SliderImageItems[]> {
+    public static GetItems(context:any, wpDisplayView: displayView, imgOrderBy: orderBy, imgOrderByDirection: orderByDirection, cdnEnabled: boolean): Promise<SliderImageItems[]> {
         const storage = new PnPClientStorage();
         const test: boolean = false;
         let cacheKey: string = `SliderImageItems`;
@@ -26,7 +26,7 @@ export class ImageSliderService {
                 //if (links) {
                 //    resolve(links);
                 //} else {
-                    let itemsPromise = this.getSPItems(wpDisplayView);
+                    let itemsPromise = this.getSPItems(wpDisplayView, imgOrderBy, imgOrderByDirection);
                     Promise.all([itemsPromise]).then((results: any[]) => {
                         links = this.convertItems(context,results[0], cdnEnabled);
                         storage.local.put(cacheKey, links);
@@ -37,19 +37,32 @@ export class ImageSliderService {
         }
     }
 
-    private static getSPItems(wpDisplayView: displayView) {
+    private static getSPItems(wpDisplayView: displayView, imgOrderBy: orderBy, imgOrderByDirection: orderByDirection) {
         var filterDate = moment().format("YYYY-MM-DD");
+        let blOrderByDirection: boolean = true;
+        if (imgOrderByDirection === orderByDirection.Descending){
+            blOrderByDirection = false;
+        }
         return new Promise<any[]>((resolve, reject) => {
             var spItems: IItems = sp.web.lists.getByTitle("Slider Images").items;
-            spItems.select("Id,Title,LinkFilename,ImgSliderCaptions,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified,EncodedAbsUrl");
+            spItems.select("Id,Title,LinkFilename,ImgSliderCaptions,ImgSliderPublishStart,ImgSliderPublishEnd,ImgSliderEnabled,ImgSliderLink,ImgSliderNewTab,ImgSliderEnabled,Modified,Created,ImgSliderDisplayOrder,EncodedAbsUrl");
             if (wpDisplayView === displayView.EnabledOnly){
                 spItems.filter("ImgSliderEnabled eq 1");
                 spItems.orderBy("Modified");
             } else if (wpDisplayView === displayView.PublicDates){
                 spItems.filter("ImgSliderPublishStart le '" + filterDate + "' and ImgSliderPublishEnd ge '" + filterDate + "'");
                 spItems.orderBy("ImgSliderPublishStart");
-            } else {
-                spItems.orderBy("Modified");
+            }
+
+            switch(imgOrderBy){
+                case orderBy.Created:
+                    spItems.orderBy("Created", blOrderByDirection);
+                    break;
+                case orderBy.DisplayOrder:
+                    spItems.orderBy("ImgSliderDisplayOrder", blOrderByDirection);
+                    break;
+                default:
+                    spItems.orderBy("Modified", blOrderByDirection);
             }
             spItems.get()
             .then((items: any[]) => {    
