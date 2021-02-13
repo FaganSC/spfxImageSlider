@@ -2,7 +2,6 @@
 | --------------- | --------------------------------------- |
 | Bug fix?        | no - yes?                               |
 | New feature?    | no - yes?                               |
-| New sample?     | no - yes?                               |
 | Related issues? | fixes #X, partially #Y, mentioned in #Z |
 
 ## What's in this Pull Request?
