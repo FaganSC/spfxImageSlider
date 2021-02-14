@@ -49,21 +49,32 @@ SPFX Image Slider | [Shawn Fagan](https://twitter.com/fagansc)
 Version|Date|Comments
 -------|----|--------
 1.0.0.0|January 25, 2021|Initial release
+1.1.0.0|february 13, 2021|Added New Order By Options
 
 ## Current Features
-### Image Size
-
-### Slide Speed
-### Display Image Filter
-
-### Display Slide Caption
-
-### Display Slide Indicators
-
-### Render Images using Office 365 Public CDN
-
-### Select Default Image
-
+- Ability to adjust the Image Size
+  - Small (Height: 300px)
+  - Medium (Height: 350px)
+  - Large (Height: 400px)
+  - X-Large (Height: 450px)
+- Ability to adjust the Slide Speed
+  - Min Speed: 5 Seconds inbetween slides
+  - Max Speed: 30 Seconds inbetween slides
+- Ability to select the Display Image Filter
+  - Display All Images within the Library
+  - Display Images with the Enabled Flag set to Yes
+  - Display Image based on the Publish Start & End fields
+- Ability to select the field to use to order of images to be displayed
+  - Modified Date
+  - Created Date
+  - Display Order Field
+- Ability to select the direction of the field to order of images to be displayed
+  - Ascending
+  - Descending
+- Hide or Show the Image Caption
+- Hide or Show the Slide Indicators
+- Render Images using Office 365 Public CDN
+- Select a Default Image to display if no image is found in the libary
 ## Future Features
  - Multplie Layout Options
  - Configurable Caption Settings
