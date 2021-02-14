@@ -10,18 +10,22 @@
             "title": "Slider Image Web Part",
             "description": "Deployment of Slider Image Web Part and Library",
             "id": "61bfff46-b2a0-440a-8f80-efc2a03c21d1",
-            "version": "1.0.0.0",
+            "version": "2.0.0.0",
             "assets": {
                 "elementManifests": [
-                    "elements.xml"
+                    "elements.xml",
+                    "elements-v2.xml"
                 ],
                 "elementFiles": [
                     "schema.xml",
                     "Virginia_Beach_Oceanfront.jpg"
+                ],
+                "upgradeActions": [
+                    "upgrade-actions-v2.xml"
                 ]
             }
         }],
-        "skipFeatureDeployment": true,
+        "skipFeatureDeployment": false,
         "isDomainIsolated": false,
         "developer": {
             "name": "",

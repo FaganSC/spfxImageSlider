@@ -19,7 +19,9 @@
             "slideSpeed": 10,
             "captionDisplay": 1,
             "cdnStatus": 0,
-            "showIndicators": 1
+            "showIndicators": 1,
+            "orderBy": 0,
+            "orderByDirection": 0
         }
     }]
 }

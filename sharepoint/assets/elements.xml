@@ -1,92 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-    <Field ID="{d086554e-1290-435d-9c1e-2263189e88c9}" 
-           Name="ImgSliderPublishStart" 
-           DisplayName="Publish Start Date" 
-           StaticName="ImgSliderPublishStart" 
-           Group="Image Slider Columns"
-           Type="DateTime" 
-           Required="FALSE" 
-           Format="DateOnly"
-           />
-    <Field ID="{18946d2a-2b5c-4e06-b6eb-9489482add4d}" 
-           Name="ImgSliderPublishEnd" 
-           DisplayName="Publish End Date" 
-           StaticName="ImgSliderPublishEnd" 
-           Group="Image Slider Columns"
-           Type="DateTime" 
-           Required="FALSE" 
-           Format="DateOnly"
-           />
-    <Field ID="{f4e5dd71-448f-40e2-b991-35874a0d7fd6}" 
-           Name="ImgSliderLink" 
-           DisplayName="Link" 
-           StaticName="ImgSliderLink" 
-           Group="Image Slider Columns"
-           Type="URL" 
-           Required="FALSE" 
-           EnforceUniqueValues="FALSE" 
-           Indexed="FALSE" 
-           Format="Hyperlink" 
-        />
-    <Field ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}"
-           Name="ImgSliderCaptions"
-           DisplayName="Captions"
-           Type="Note"
-           Required="FALSE"
-           Group="Image Slider Columns"/>
-    <Field ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}"
-           Name="ImgSliderNewTab"
-           DisplayName="New Tab"
-           Type="Boolean"
-           Required="FALSE"
-           Group="Image Slider Columns"/>
-    <Field ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}"
-           Name="ImgSliderEnabled"
-           DisplayName="Enabled"
-           Type="Boolean"
-           Required="FALSE"
-           Group="Image Slider Columns"/>
+       <Field ID="{d086554e-1290-435d-9c1e-2263189e88c9}" Name="ImgSliderPublishStart" DisplayName="Publish Start Date" StaticName="ImgSliderPublishStart" Group="Image Slider Columns" Type="DateTime" Required="FALSE" Format="DateOnly" />
+       <Field ID="{18946d2a-2b5c-4e06-b6eb-9489482add4d}" Name="ImgSliderPublishEnd" DisplayName="Publish End Date" StaticName="ImgSliderPublishEnd" Group="Image Slider Columns" Type="DateTime" Required="FALSE" Format="DateOnly" />
+       <Field ID="{f4e5dd71-448f-40e2-b991-35874a0d7fd6}" Name="ImgSliderLink" DisplayName="Link" StaticName="ImgSliderLink" Group="Image Slider Columns" Type="URL" Required="FALSE" EnforceUniqueValues="FALSE" Indexed="FALSE" Format="Hyperlink" />
+       <Field ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}" Name="ImgSliderCaptions" DisplayName="Captions" Type="Note" Required="FALSE" Group="Image Slider Columns" />
+       <Field ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}" Name="ImgSliderNewTab" DisplayName="New Tab" Type="Boolean" Required="FALSE" Group="Image Slider Columns" />
+       <Field ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}" Name="ImgSliderEnabled" DisplayName="Enabled" Type="Boolean" Required="FALSE" Group="Image Slider Columns" />
+       <Field ID="{A3C6E34A-CBDD-4E57-85D3-846348497A0B}" Name="ImgSliderDisplayOrder" DisplayName="Display Order" Group="Image Slider Columns" Type="Number" Decimals="0" Min="0" Required="FALSE" />
 
-    <!-- Parent ContentType: Document (0x0101) -->
-    <ContentType ID="0x0101A33D9AD9805788419BDAAC2CCB37500F"
-                Name="Image Slider" 
-                Group="Image Slider Content Types"
-                Description="Image Slider content types from web part solution"
-                Inherits="FALSE"
-                Version="0"
-                Hidden="FALSE"
-                Sealed="FALSE"
-                >
-        <FieldRefs>
-            <FieldRef ID="{d086554e-1290-435d-9c1e-2263189e88c9}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{18946d2a-2b5c-4e06-b6eb-9489482add4d}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{f4e5dd71-448f-40e2-b991-35874a0d7fd6}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-        </FieldRefs>
-        <DocumentTemplate TargetName="/_layouts/15/upload.aspx"/>
-    </ContentType> 
+       <!-- Parent ContentType: Document (0x0101) -->
+       <ContentType ID="0x0101A33D9AD9805788419BDAAC2CCB37500F" Name="Image Slider" Group="Image Slider Content Types" Description="Image Slider content types from web part solution" Inherits="FALSE" Version="0" Hidden="FALSE" Sealed="FALSE">
+              <FieldRefs>
+                     <FieldRef ID="{d086554e-1290-435d-9c1e-2263189e88c9}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                     <FieldRef ID="{18946d2a-2b5c-4e06-b6eb-9489482add4d}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                     <FieldRef ID="{f4e5dd71-448f-40e2-b991-35874a0d7fd6}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                     <FieldRef ID="{30F0BC75-7FB8-40AF-B133-D4AE50E9D908}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                     <FieldRef ID="{C07D949C-4D99-4936-B039-8ABB4AD4AAB8}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                     <FieldRef ID="{E2B01352-3D06-4102-AD32-FEAA4DEA40A0}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+                     <FieldRef ID="{A3C6E34A-CBDD-4E57-85D3-846348497A0B}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+              </FieldRefs>
+              <DocumentTemplate TargetName="/_layouts/15/upload.aspx" />
+       </ContentType>
 
-    <!-- Document Library (TemplateType 101) -->
-    <ListInstance 
-            CustomSchema="schema.xml"
-            FeatureId="00bfea71-e717-4e80-aa17-d0c71b360101"
-            Title="Slider Images" 
-            Description=""
-            TemplateType="101"
-            Url="SliderImgs"
-            Hidden="FALSE">
-    </ListInstance>
-    
-    <!-- Upload files to the SPFxDocumentLibrary -->
-    <Module Name="Files" Url="SliderImgs">
-        <File Path="Virginia_Beach_Oceanfront.jpg" Url="Virginia_Beach_Oceanfront.jpg" Type="GhostableInLibrary" ReplaceContent="TRUE" >
-            <Property Name="Title" Value = "Virginia Beach Oceanfront"/>
-            <Property Name="ImgSliderLink" Value = "/"/>
-            <Property Name="ImgSliderNewTab" Value = "0"/>
-            <Property Name="ImgSliderCaptions" Value = "Picture of the Virginia Beach Ocreanfront beach"/>
-        </File>
-    </Module>
+       <!-- Document Library (TemplateType 101) -->
+       <ListInstance CustomSchema="schema.xml" FeatureId="00bfea71-e717-4e80-aa17-d0c71b360101" Title="Slider Images" Description="" TemplateType="101" Url="SliderImgs" Hidden="FALSE"></ListInstance>
+
+       <!-- Upload files to the SPFxDocumentLibrary -->
+       <Module Name="Files" Url="SliderImgs">
+              <File Path="Virginia_Beach_Oceanfront.jpg" Url="Virginia_Beach_Oceanfront.jpg" Type="GhostableInLibrary" ReplaceContent="TRUE">
+                     <Property Name="Title" Value="Virginia Beach Oceanfront" />
+                     <Property Name="ImgSliderLink" Value="/" />
+                     <Property Name="ImgSliderNewTab" Value="0" />
+                     <Property Name="ImgSliderCaptions" Value="Picture of the Virginia Beach Ocreanfront beach" />
+                     <Property Name="ImgSliderDisplayOrder" Value="1" />
+              </File>
+       </Module>
 </Elements>
