@@ -49,7 +49,8 @@ SPFX Image Slider | [Shawn Fagan](https://twitter.com/fagansc)
 Version|Date|Comments
 -------|----|--------
 1.0.0.0|January 25, 2021|Initial release
-1.1.0.0|february 13, 2021|Added New Order By Options
+1.1.0.0|February 13, 2021|Added New Order By Options
+1.1.1.0|February 19, 2021|Corrected Pipeline Build Process
 
 ## Current Features
 - Ability to adjust the Image Size
