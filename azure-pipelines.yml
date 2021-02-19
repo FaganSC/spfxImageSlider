@@ -4,37 +4,30 @@ trigger:
       - develop
       - release/*
       - feature/*
-      - refs/tags/*
-  paths:
-    exclude:
-    - README.md
-    - azure-pipelines.yml
-    - documentation
+      - master
 resources:
   repositories:
-  - repository: AzurePipelinesTemplates
+  - repository: azure-pipelines-templates
     type: github
     endpoint: FaganSC
-    name: FaganSC/AzurePipelinesTemplates
+    name: FaganSC/azure-pipelines-templates
     ref: master
 variables:
   node_version: '10.x'
   package_manager: 'npm'
-name: $(Build.DefinitionName) $(SourceBranchName) $(Date:yyyyMMdd)$(Rev:.r)
+  majorminor: '1.1.0'
+  patch: $[counter(${{ variables.majorminor }}, 0)]
+  version: $(majorminor).$(patch)
+name: ${{ variables.version }}
 stages:
-- stage: Versioning
-  jobs:
-    - template: general/versioning.yml@AzurePipelinesTemplates
 - stage: Build
   jobs:
-    - template: spfx/build.yml@AzurePipelinesTemplates
-  dependsOn: 
-    - Versioning
+    - template: spfx/build.yml@azure-pipelines-templates
 - stage: Test
   dependsOn: 
     - Build
   jobs:
-    - template: spfx/test.yml@AzurePipelinesTemplates
+    - template: spfx/test.yml@azure-pipelines-templates
       parameters:
         working_directory: 
         package_manager: ${{ variables.package_manager }}
@@ -44,7 +37,7 @@ stages:
   dependsOn:
     - Test
   jobs:
-    - template: spfx/release.yml@AzurePipelinesTemplates
+    - template: spfx/release.yml@azure-pipelines-templates
       parameters:
         release_title: 'Pre-Release $(Build.BuildNumber)'
         target_environment: PreRelease
@@ -56,7 +49,7 @@ stages:
   dependsOn:
     - Test
   jobs:
-    - template: spfx/release.yml@AzurePipelinesTemplates
+    - template: spfx/release.yml@azure-pipelines-templates
       parameters:
         release_title: 'Release $(Build.BuildNumber)'
         target_environment: Production
@@ -68,7 +61,7 @@ stages:
   dependsOn:
     - Test
   jobs:
-    - template: spfx/deploy.yml@AzurePipelinesTemplates
+    - template: spfx/deploy.yml@azure-pipelines-templates
       parameters:
         target_environment: Development
         variables_group: DevelopmentTenant
@@ -79,7 +72,7 @@ stages:
   dependsOn:
     - GitHubPreRelease
   jobs:
-    - template: spfx/deploy.yml@AzurePipelinesTemplates
+    - template: spfx/deploy.yml@azure-pipelines-templates
       parameters:
         target_environment: PreRelease
         isPreRelease: True
@@ -92,7 +85,7 @@ stages:
   dependsOn:
     - GitHubRelease
   jobs:
-    - template: spfx/deploy.yml@AzurePipelinesTemplates
+    - template: spfx/deploy.yml@azure-pipelines-templates
       parameters:
         target_environment: Release
         isPreRelease: False
